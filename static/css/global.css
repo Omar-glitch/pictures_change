@@ -1,0 +1,329 @@
+:root {
+    --primary: #ffa710;
+    --secondary: #e0ff10;
+    --green: #68ff10;
+    --lightgreen: #10ff30;
+    --palmgreen: #10ffa7;
+    --lightblue: #10e0ff;
+    --light: #FBFBFB;
+    --light-d: #EBEDF0;
+    --dark: #444444;
+    --shadow: rgba(0 0 0 / 20%)
+}
+
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--light);
+    font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+    background-color: var(--light);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 1.25rem;
+    background-color: var(--primary);
+}
+
+::-webkit-scrollbar-corner {
+    background-color: black;
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3.4375rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 0.625rem;
+    justify-content: space-between;
+    transition: top .4s, box-shadow .4s;
+    z-index: 5;
+}
+
+a, button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+*::selection {background-color: var(--primary); color: var(--light);}
+
+li {list-style: none;}
+
+#barras {
+    width: 2.1875rem;
+    height: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#barras > hr {
+    width: 95%;
+    height: 0.3125rem;
+    background-color: var(--primary);
+    border: none;
+    outline: none;
+    border-radius: 0.25rem;
+    transition: opacity .3s, transform .3s;
+}
+
+.oc hr:nth-child(1) {transform: translateY(0.7375rem) rotateZ(45deg);}
+.oc hr:nth-child(2) {opacity: 0;}
+.oc hr:nth-child(3) {transform: translateY(-0.7375rem) rotateZ(-45deg);}
+
+#lista {
+    position: fixed;
+    top: 3.4375rem;
+    background-color: var(--light);
+    height: calc(100vh - 3.4375rem);
+    min-width: 17.5rem;
+    width: 100%;
+    max-width: 18.75rem;
+    box-shadow: 0 -3.4375rem var(--light);
+    z-index: -1;
+    left: -20rem;
+    transition: left .4s;
+    padding: 0 15px;
+    list-style: none;
+}
+
+.h-title {
+    text-transform: uppercase;
+    font-size: 12.2px;
+    opacity: .44;
+    padding-left: 10px;
+    margin: 10px 0;
+}
+
+#lista li a {
+    display: flex;
+    padding: 10px 15px;
+    margin: 8px 0;
+    color: var(--dark);
+    border-radius: 10px;
+    transition: background-color .3s, color .3s;
+}
+
+#lista li a:is(:hover, :focus) {
+    background-color: rgba(255, 166, 0, 0.05);
+    color: var(--primary);
+}
+
+.h-button a {
+    background-color: var(--primary);
+}
+
+#lista .h-button-outlined a {
+    background-color: transparent;
+    padding: 8.5px 15px;
+    border: 2px solid var(--primary);
+}
+
+.h-button-outlined a p {
+    text-align: center;
+    color: var(--primary);
+    width: 100%;
+    font-weight: 600;
+}
+
+#lista .h-button-outlined a:is(:hover, :focus) {
+    background-color: var(--primary);
+}
+
+#lista .h-button-outlined a:is(:hover, :focus) p {
+    color: var(--light);
+}
+
+.h-button a > p {
+    text-align: center;
+    color: var(--light);
+    width: 100%;
+    font-weight: 600;
+}
+
+#lista .h-button a:is(:hover, :focus) {
+    background-color: var(--primary);
+    opacity: .8;
+}
+
+#logo-container {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: var(--primary);
+    /* text-transform: uppercase; */
+    font-size: 22px;
+    font-weight: 600;
+}
+
+#logo {
+    fill: var(--primary);
+    width: 36px;
+    height: 36px;
+    margin-right: 6px;
+}
+
+#lista li a:hover svg {fill: var(--primary);}
+
+#lista li a svg {
+    fill: var(--dark);
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.5rem;
+    transition: fill .3s;
+    margin-top: -2.5px;
+}
+
+#shadow {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0 0 0 / 65%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -2;
+}
+
+#footer {
+    position: relative;
+    background-color: var(--dark);
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.add_us {
+    margin: 0 auto;
+    min-width: 275px;
+    width: 85%;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1.6px solid var(--light-d);
+}
+
+.add_us > h1 {
+    font-size: 30px;
+    color: var(--light);
+    margin-bottom: 20px;
+}
+
+.button:is(:hover, :focus) {
+    opacity: .9;
+}
+
+.button > p {
+    border-radius: 12px;
+    color: var(--dark);
+    padding: 8px 10px;
+    background-color: var(--light);
+    font-weight: 600;
+    text-align: center;
+}
+
+.footer_container_lists {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    min-width: 275px;
+    margin: 0 auto;
+    margin-top: 30px;
+    max-width: 1050px;
+}
+
+.footer_list {
+    color: var(--light);
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.footer_list li a {color: var(--light-d);}
+.footer_list li a:is(:hover, :focus) {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.footer_list li a p {
+    padding: 4px 0;
+    width: 100%;
+}
+
+.footer_list li:first-child {
+    padding: 10px 0;
+    padding-bottom: 20px;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.rights {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    font-size: 14px;
+    color: var(--light-d);
+}
+
+@media (min-aspect-ratio: 7 / 6) {
+    #barras {display: none;}
+    .h-title {display: none;}
+    #lista li a svg {display: none;}
+
+    #lista li a {
+        width: auto;
+        color: var(--primary);
+        margin: 8px 5px;
+    }
+
+    #lista {
+        position: static;
+        display: flex;
+        background-color: transparent;
+        height: 100%;
+        align-items: center;
+        width: auto;
+        max-width: unset;
+    }
+
+    .add_us {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .button > p {
+        padding: 12px;
+        width: 120px;
+    }
+
+    .add_us > h1 {
+        margin-bottom: 0;
+    }
+
+    .footer_list {
+        width: 50%;
+    }
+
+    @media (min-width: 1000px) {
+        .add_us {width: 90%;}
+
+        .footer_container_lists {
+            width: 98%;
+            justify-content: space-between;
+
+        }
+
+        .footer_list {width: 22%;}
+    }
+}

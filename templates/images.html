@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi API</title>
+    <style>
+      body {
+        background: #317a7f;
+      }
+      form {
+        
+      }
+      .img {
+          width: 200px;
+          height: 200px;
+          object-fit: cover;
+      }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', path='css/global.css') }}">
+</head>
+<body>
+    <form action="" id="form">
+      <input type="file" accept="image/*" multiple name="file" id="file">
+    </form>
+
+    <p>Imágenes</p>
+    <div class="container"></div>
+
+    <button id="send">Enviar imagen</button>
+
+    <script>
+      const inputFile = document.getElementById('file');
+      const img = document.getElementById('img');
+      const container = document.querySelector('.container');
+
+      const createImg = (src) => {
+        const image = document.createElement('img')
+        image.className = 'img'
+        image.src = src;
+        container.appendChild(image)
+      }
+
+      inputFile.addEventListener('change', e => {
+        const files = inputFile.files
+
+        for (const f of files) {
+          const source = URL.createObjectURL(f);
+          createImg(source);
+        }
+      })
+
+      const sendImage = () => {
+        const form = document.querySelector('#form');
+
+        const formdata = new FormData(form)
+
+        fetch("/a", {method: 'POST', body: formdata})
+          .then(res => res.json()
+            .then(res => console.log(res)
+          ))
+          .catch(e => console.log(e))
+      }
+      
+      const sendButton = document.getElementById('send');
+      sendButton.addEventListener('click', sendImage);
+    </script>
+</body>
+</html>
