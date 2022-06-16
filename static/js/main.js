@@ -37,23 +37,5 @@
 
     scrollHandler();    
     window.addEventListener('scroll', scrollHandler);
-    window.addEventListener('resize', handleResize)
-
-    // const label_file = document.querySelector('#file_label')
-
-    // label_file.addEventListener('drag', e => {e.preventDefault();})
-    // label_file.addEventListener('dragstart', e => {e.preventDefault();})
-    // label_file.addEventListener('dragover', e => {e.preventDefault();})
-    // label_file.addEventListener('dragend', e => {e.preventDefault();})
-    // label_file.addEventListener('dragenter', e => {e.preventDefault();})
-    // label_file.addEventListener('dragleave', e => {e.preventDefault();})
-
-    // label_file.addEventListener('drop', e => {
-    //     e.preventDefault();
-    //     // for (const f of e.dataTransfer.files) {
-    //     //     const source = URL.createObjectURL(f);
-    //     //     const i = document.getElementById('a')
-    //     //     i.src = source;
-    //     // }
-    // })
+    window.addEventListener('resize', handleResize);
 })()

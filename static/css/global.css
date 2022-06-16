@@ -95,29 +95,29 @@ li {list-style: none;}
     z-index: -1;
     left: -20rem;
     transition: left .4s;
-    padding: 0 15px;
+    padding: 0 0.9375rem;
     list-style: none;
 }
 
 .h-title {
     text-transform: uppercase;
-    font-size: 12.2px;
+    font-size: 0.7625rem;
     opacity: .44;
-    padding-left: 10px;
-    margin: 10px 0;
+    padding-left: 0.625rem;
+    margin: 0.625rem 0;
 }
 
 #lista li a {
     display: flex;
-    padding: 10px 15px;
-    margin: 8px 0;
+    padding: 0.625rem 0.9375rem;
+    margin: 0.5rem 0;
     color: var(--dark);
-    border-radius: 10px;
-    transition: background-color .3s, color .3s;
+    border-radius: 0.625rem;
+    transition: background-color .3s, color .3s ;
 }
 
 #lista li a:is(:hover, :focus) {
-    background-color: rgba(255, 166, 0, 0.05);
+    background-color: rgba(255, 166, 0, 0.1);
     color: var(--primary);
 }
 
@@ -127,8 +127,8 @@ li {list-style: none;}
 
 #lista .h-button-outlined a {
     background-color: transparent;
-    padding: 8.5px 15px;
-    border: 2px solid var(--primary);
+    padding: 0.5313rem 0.9375rem;
+    border: 0.125rem solid var(--primary);
 }
 
 .h-button-outlined a p {
@@ -163,16 +163,15 @@ li {list-style: none;}
     height: 100%;
     align-items: center;
     color: var(--primary);
-    /* text-transform: uppercase; */
-    font-size: 22px;
+    font-size: 1.375rem;
     font-weight: 600;
 }
 
 #logo {
     fill: var(--primary);
-    width: 36px;
-    height: 36px;
-    margin-right: 6px;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-right: 0.375rem;
 }
 
 #lista li a:hover svg {fill: var(--primary);}
@@ -183,7 +182,7 @@ li {list-style: none;}
     height: 1.25rem;
     margin-right: 0.5rem;
     transition: fill .3s;
-    margin-top: -2.5px;
+    margin-top: -0.1563rem;
 }
 
 #shadow {
@@ -201,23 +200,23 @@ li {list-style: none;}
 #footer {
     position: relative;
     background-color: var(--dark);
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-top: 1.25rem;
+    padding-bottom: 1.875rem;
 }
 
 .add_us {
     margin: 0 auto;
-    min-width: 275px;
+    min-width: 17.1875rem;
     width: 85%;
     text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1.6px solid var(--light-d);
+    padding-bottom: 1.25rem;
+    border-bottom: 0.1rem solid var(--light-d);
 }
 
 .add_us > h1 {
-    font-size: 30px;
+    font-size: 1.875rem;
     color: var(--light);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .button:is(:hover, :focus) {
@@ -225,9 +224,9 @@ li {list-style: none;}
 }
 
 .button > p {
-    border-radius: 12px;
+    border-radius: 0.75rem;
     color: var(--dark);
-    padding: 8px 10px;
+    padding: 0.5rem 0.625rem;
     background-color: var(--light);
     font-weight: 600;
     text-align: center;
@@ -237,16 +236,16 @@ li {list-style: none;}
     display: flex;
     flex-wrap: wrap;
     width: 85%;
-    min-width: 275px;
+    min-width: 17.1875rem;
     margin: 0 auto;
-    margin-top: 30px;
-    max-width: 1050px;
+    margin-top: 1.875rem;
+    max-width: 65.625rem;
 }
 
 .footer_list {
     color: var(--light);
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 1.5625rem;
 }
 
 .footer_list li a {color: var(--light-d);}
@@ -256,22 +255,22 @@ li {list-style: none;}
 }
 
 .footer_list li a p {
-    padding: 4px 0;
+    padding: 0.25rem 0;
     width: 100%;
 }
 
 .footer_list li:first-child {
-    padding: 10px 0;
-    padding-bottom: 20px;
+    padding: 0.625rem 0;
+    padding-bottom: 1.25rem;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 1.0625rem;
 }
 
 .rights {
     position: absolute;
-    bottom: 10px;
-    left: 20px;
-    font-size: 14px;
+    bottom: 0.625rem;
+    left: 1.25rem;
+    font-size: 0.75rem;
     color: var(--light-d);
 }
 
@@ -283,7 +282,8 @@ li {list-style: none;}
     #lista li a {
         width: auto;
         color: var(--primary);
-        margin: 8px 5px;
+        margin: 0.5rem 0.25rem;
+        padding: 0.5rem 0.625rem;
     }
 
     #lista {
@@ -294,6 +294,7 @@ li {list-style: none;}
         align-items: center;
         width: auto;
         max-width: unset;
+        padding: 0;
     }
 
     .add_us {
@@ -303,8 +304,8 @@ li {list-style: none;}
     }
 
     .button > p {
-        padding: 12px;
-        width: 120px;
+        padding: 0.75rem;
+        width: 7.5rem;
     }
 
     .add_us > h1 {
@@ -315,13 +316,12 @@ li {list-style: none;}
         width: 50%;
     }
 
-    @media (min-width: 1000px) {
+    @media (min-width: 62.5rem) {
         .add_us {width: 90%;}
 
         .footer_container_lists {
             width: 98%;
             justify-content: space-between;
-
         }
 
         .footer_list {width: 22%;}

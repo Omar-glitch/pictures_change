@@ -22,3 +22,15 @@ async def posting(request: Request):
 @app.get('/img')
 async def img_home(request : Request):
     return templates.TemplateResponse('images.html', {'request' : request})
+
+@app.get('/doc')
+async def doc(request: Request):
+    return templates.TemplateResponse('docs.html', {'request' : request})
+
+@app.get('/converter')
+async def converter(request: Request):
+    return templates.TemplateResponse('converter.html', {'request' : request})
+
+@app.get('/about')
+async def about(request: Request):
+    return templates.TemplateResponse('about.html', {'request' : request})
