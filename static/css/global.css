@@ -55,6 +55,8 @@ a, button {
     background-color: transparent;
     cursor: pointer;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 *::selection {background-color: var(--primary); color: var(--light);}
@@ -113,7 +115,7 @@ li {list-style: none;}
     margin: 0.5rem 0;
     color: var(--dark);
     border-radius: 0.625rem;
-    transition: background-color .3s, color .3s ;
+    transition: background-color .3s, color .3s;
 }
 
 #lista li a:is(:hover, :focus) {

@@ -134,7 +134,7 @@
     margin-bottom: 40px;
 }
 
-.info-card > svg {width: 280px; height: 280px;}
+.info-card > svg {width: 260px; height: 260px;}
 
 .info-card:last-child {
     margin-bottom: 0;
@@ -149,20 +149,19 @@
     margin: 14px 0;
 }
 
-.info-title a {
-    background-color: var(--primary);
-    border-radius: 12px;
-    color: var(--light);
-}
-
 .info-button {display: flex;}
 
 .info-title a {
-    color: var(--light); 
-    background-color: var(--primary);
+    color: var(--light);
     padding: 10px 15px;
     border-radius: 12px;
     text-align: center;
+    background-color: var(--primary);
+    transition: filter .4s;
+}
+
+.info-title a:is(:hover, :focus) {
+    filter: brightness(1.15);
 }
 
 
