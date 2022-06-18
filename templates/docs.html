@@ -2,5 +2,13 @@
 
 {% block title %}Documentación | Pictures change{% endblock %}
 {% block links %}{% endblock %}
-{% block content %}a{% endblock %}
+{% block content %}
+<div class="main">
+    <h1>Documentación de la API</h1>
+    <hr />
+    <h2>Comience una convertir desde comandos</h2>
+    <p>Para empezar necesita hacer la siguiente petición POST:</p>
+    <pre>POST {{ url_for('converter') }}</pre>
+</div>
+{% endblock %}
 {% block scripts %}{% endblock %}

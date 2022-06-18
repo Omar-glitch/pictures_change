@@ -21,13 +21,29 @@
 </section>
 
 <section id="add_img">
-    <img src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" id="img_c" alt="">
-        <div id='img_info'>
-            <p>700 x 400</p>
-            <p>Peso: 45000 KB</p>
+    <div id="img_c">
+        <img class="main_img" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" alt="">
+        <div class="r_container">
+            <div class="resize">
+                <div class="r-ne"></div>
+                <div class="r-se"></div>
+                <div class="r-nw"></div>
+                <div class="r-sw"></div>
+                <div class="r-n"></div>
+                <div class="r-s"></div>
+                <div class="r-w"></div>
+                <div class="r-e"></div>
+            </div>
         </div>
-        <button>Recortar</button>
-        <button>Cancelar</button>
+    </div>
+    <div id='img_info'>
+        <p>Dimensiones: 700 x 400px.</p>
+        <p>Peso: 45000 KB</p>
+    </div>
+    <div id="img_actions">
+        <button class="outline-btn">Cancelar</button>
+        <button class="btn">Recortar</button>
+    </div>
 </section>
 {% endblock %}
 

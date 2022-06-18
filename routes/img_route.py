@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, UploadFile, HTTPException
+from fastapi import APIRouter, File, Request, UploadFile, HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
 from docx import Document
 from utils.render_imgs import render_image, render_image_full
@@ -8,9 +8,17 @@ WORD_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessin
 
 route = APIRouter(prefix="/img")
 
+# @route.post('/')
+# async def img(img : UploadFile = File(...)):
+#     resized_img = await render_image_full(img)
+#     resized_img.seek(0)
+#     return StreamingResponse(resized_img, media_type='image/jpeg')
+
 @route.post('/')
-async def img(img : UploadFile = File(...)):
-    resized_img = await render_image_full(img)
+async def img(request : Request):
+    print(await request.form())
+    img = await request.form()
+    resized_img = await render_image_full(img.get('file'))
     resized_img.seek(0)
     return StreamingResponse(resized_img, media_type='image/jpeg')
 

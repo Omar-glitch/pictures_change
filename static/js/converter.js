@@ -21,7 +21,7 @@
     const createContainerElement = (children = [], type='div') => {
         const container = document.createElement(type);
         for (const child of children) {
-            container.appendChild(child)
+            container.appendChild(child);
         }
     }
 
@@ -74,6 +74,23 @@
             function getImage() {
                 let w = this.clientWidth;
                 let h = this.clientHeight;
+
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = w;
+                canvas.height = h;
+
+                const formdata = new FormData();
+                formdata.append('file', input_file.files[0])
+
+                fetch('/img/', {method: 'post', body: formdata})
+                .then(res => {console.log(res.blob())})
+                .catch(e => console.log(e))
+
+                // Draw the image
+                ctx.drawImage(this, 0, 0);
+                // Get Base64 img, 0.8 means quality
+                console.log(canvas.toDataURL('image/jpeg', 0.8))
                 const pw = createTextElement(w);
                 const ph = createTextElement(h);
                 appendChildrenToElement([pw, ph], section)
