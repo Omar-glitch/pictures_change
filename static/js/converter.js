@@ -66,6 +66,7 @@
         }
     }
 
+
     function createImageUrl() {
         for (const file of this.files) {
             const source = URL.createObjectURL(file);
@@ -75,28 +76,39 @@
                 let w = this.clientWidth;
                 let h = this.clientHeight;
 
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = w;
-                canvas.height = h;
+                // const canvas = document.createElement('canvas');
+                // const ctx = canvas.getContext('2d');
+                // canvas.width = w;
+                // canvas.height = h;
 
-                const formdata = new FormData();
-                formdata.append('file', input_file.files[0])
+                // const formdata = new FormData();
+                // formdata.append('img', input_file.files[0])
 
-                fetch('/img/', {method: 'post', body: formdata})
-                .then(res => {console.log(res.blob())})
-                .catch(e => console.log(e))
+                // fetch('/img/', {method: 'post', body: formdata})
+                // .then(res => res.blob())
+                // .then(blob => {
+                //     let a = document.createElement("a");
+                //     document.body.appendChild(a);
+                //     a.style = "display: none";
+                //     const url = window.URL.createObjectURL(blob);
+                //     a.href = url;
+                //     a.download = 'algo.jpeg';
+                //     a.click();
+                //     window.URL.revokeObjectURL(url);
+                //     document.body.removeChild(a);
+                // });  
 
                 // Draw the image
-                ctx.drawImage(this, 0, 0);
+                // ctx.drawImage(this, 0, 0);
                 // Get Base64 img, 0.8 means quality
-                console.log(canvas.toDataURL('image/jpeg', 0.8))
-                const pw = createTextElement(w);
-                const ph = createTextElement(h);
-                appendChildrenToElement([pw, ph], section)
+                // console.log(canvas.toDataURL('image/jpeg', 0.8))
+                // const pw = createTextElement(w);
+                // const ph = createTextElement(h);
+                // appendChildrenToElement([pw, ph], section)
             }
 
             const img = createImageElement(source, "", getImage)
+            img.id = 'img_c '
             const p_size = createTextElement(`${file.size} KB`)
 
             appendChildrenToElement([img, p_size], section)
@@ -118,4 +130,122 @@
         e.preventDefault();
         console.log(e.dataTransfer.files)
     })
+
+    // const resizeCont = document.querySelector('.r_container');
+    // const resizeDiv = document.querySelector('.resize');
+    
+    // const rne = document.querySelector('.r-ne');
+    // const rse = document.querySelector('.r-se');
+    // const rnw = document.querySelector('.r-nw');
+    // const rsw = document.querySelector('.r-sw');
+    // const rn = document.querySelector('.r-n');
+    // const rs = document.querySelector('.r-s');
+    // const rw = document.querySelector('.r-w');
+    // const re = document.querySelector('.r-e');
+
+    // let contW = resizeCont.clientWidth;
+    // let contH = resizeCont.clientHeight;
+    // let min = Math.min(contW, contH);
+    // let r = contW - contH;
+    // let u = r / 2;
+    // let width = min;
+    // let height = min;
+
+    // let actualLeft = u;
+    // let actualTop = 0;
+    // let pointLeft = u;
+    // let pointTop = 0;
+
+    // resizeDiv.style.width = `${min}px`;
+    // resizeDiv.style.height = `${min}px`;
+    // resizeDiv.style.top = `${0}px`;
+    // resizeDiv.style.left = `${u}px`;
+
+    // let moving = false;
+
+    // let pointInitialX = 0;
+    // let pointInitialY = 0;
+    // let restoX = 0;
+    // let restoY = 0;
+    // let dir = ''
+
+    // const mousedown = (e, dire) => {
+    //     e.stopPropagation();
+    //     e.stopImmediatePropagation();
+    //     e.preventDefault();
+    //     moving = true;
+    //     pointInitialX = e.clientX;
+    //     pointInitialY = e.clientY;
+    //     dir = dire;
+    // }
+
+    // const mouseover = (e) => {
+    //     if (!moving) return;
+    //     let spaceLeft = resizeCont.getBoundingClientRect().left;
+    //     let spaceTop = resizeCont.getBoundingClientRect().top;
+
+    //     if (dir.includes('w')) {
+    //         actualLeft = e.clientX - spaceLeft;
+    //         restoX = pointLeft + spaceLeft - e.clientX;
+    //         resizeDiv.style.left = `${actualLeft}px`;
+    //         resizeDiv.style.width = `${width + restoX}px`;
+    //     }
+        
+    //     if (dir.includes('n')) {
+    //         actualTop = e.clientY - spaceTop;
+    //         restoY = pointTop + spaceTop - e.clientY;
+    //         resizeDiv.style.top = `${actualTop}px`;
+    //         resizeDiv.style.height = `${height + restoY}px`;
+    //     }
+
+    //     if (dir.includes('s')) {
+    //         height = e.clientY - (spaceTop + pointTop);
+    //         resizeDiv.style.height = `${height}px`;
+    //     }
+
+    //     if (dir.includes('e')) {
+    //         width = e.clientX - (spaceLeft + pointLeft);
+    //         resizeDiv.style.width = `${width}px`;
+    //     }
+
+    //     if (dir.includes('l')) {
+    //         actualLeft = pointLeft + (e.clientX - pointInitialX);
+    //         actualTop = pointTop + (e.clientY - pointInitialY);
+    //         resizeDiv.style.left = `${actualLeft}px`;
+    //         resizeDiv.style.top = `${actualTop}px`;
+    //     }
+    // }
+
+    // const mouseup = () => {
+    //     moving = false;
+    //     pointLeft = actualLeft;
+    //     pointTop = actualTop;
+    //     width += restoX;
+    //     height += restoY; 
+    //     restoX = 0;
+    //     restoY = 0;
+    // }
+
+    // rw.addEventListener('mousedown', (e) => mousedown(e, 'w'));
+    // re.addEventListener('mousedown', (e) => mousedown(e, 'e'));
+    // rn.addEventListener('mousedown', (e) => mousedown(e, 'n'));
+    // rs.addEventListener('mousedown', (e) => mousedown(e, 's'));
+    
+    // rnw.addEventListener('mousedown', (e) => mousedown(e, 'nw'));
+    // rne.addEventListener('mousedown', (e) => mousedown(e, 'ne'));
+    // rsw.addEventListener('mousedown', (e) => mousedown(e, 'sw'));
+    // rse.addEventListener('mousedown', (e) => mousedown(e, 'se'));
+    
+    // resizeDiv.addEventListener('mousedown', (e) => mousedown(e, 'l'));
+
+    // resizeCont.addEventListener('mousemove', mouseover)
+    // resizeCont.addEventListener('mouseup', mouseup)
+    // resizeCont.addEventListener('mouseleave', mouseup)
+
+    // const sendButton = document.querySelector('#send');
+    // sendButton.addEventListener('click', () => {
+    //     console.log(pointTop, pointTop + width)
+    //     console.log(pointLeft, pointLeft + height)
+    // });
+
 })()

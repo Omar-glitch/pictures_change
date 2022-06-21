@@ -14,14 +14,15 @@
 }
 
 .bubble {
-    background-color: rgba(255, 210, 121, 0.3);
+    background-color: var(--primary);
+    opacity: .15;
     width: 100px;
     height: 100px;
     border-radius: 50%;
     position: absolute;
     z-index: -1;
     animation: bubbles 10s infinite linear;
-    box-shadow: 0 0 15px rgba(255, 210, 121, 0.3);
+    box-shadow: 0 0 15px var(--primary);
 }
 
 .bubble:nth-child(1) {top: 100px; right: 8%;}

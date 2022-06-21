@@ -1,0 +1,38 @@
+.main {
+    padding-top: 100px;
+    margin-bottom: 50px;
+    width: 95%;
+    margin-inline: auto;
+    color: var(--dark);
+}
+
+.main > h1 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.main > h2 {
+    margin-bottom: 10px;
+}
+
+.main > p {margin-bottom: 10px;}
+
+.main > hr {
+    margin-bottom: 10px;
+    height: 2px;
+    width: 100%;
+    border: none;
+    background-color: var(--primary);
+}
+
+pre {
+    padding: 0.5rem;
+    background-color: var(--dark);
+    margin-bottom: 10px;
+    color: var(--light);
+    white-space: pre-wrap;
+}
+
+.green {
+    color: var(--green);
+}

@@ -1,8 +1,11 @@
-from fastapi import APIRouter, File, Request, UploadFile, HTTPException
+from ast import Bytes
+import base64
+from fastapi import APIRouter, Depends, Form, File, Request, UploadFile,  HTTPException
 from fastapi.responses import FileResponse, StreamingResponse
-from docx import Document
 from utils.render_imgs import render_image, render_image_full
 from io import BytesIO
+from models.img_models import ImageModel
+from PIL import Image
 
 WORD_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 
@@ -15,30 +18,23 @@ route = APIRouter(prefix="/img")
 #     return StreamingResponse(resized_img, media_type='image/jpeg')
 
 @route.post('/')
-async def img(request : Request):
-    print(await request.form())
-    img = await request.form()
-    resized_img = await render_image_full(img.get('file'))
+async def img(img : UploadFile = File()):
+    resized_img = await render_image_full(img)
     resized_img.seek(0)
-    return StreamingResponse(resized_img, media_type='image/jpeg')
+    return StreamingResponse(resized_img, media_type='image/png')
 
-# @route.post('/docx')
-# async def docs(docx : UploadFile = File(...)):
-#     if docx.content_type != WORD_CONTENT_TYPE:
-#         raise HTTPException(422)
-#     document = Document(BytesIO(await docx.read()))
-#     for p in document.paragraphs:
-#         print(p.text)
-#         print(p)
+@route.put('/')
+async def img(img : ImageModel = Depends()):
+    im = Image.open(BytesIO(await img.img[0].read()))
+    im.save(i := BytesIO(), format='WEBP')
+    img_str = base64.b64encode(i.getvalue())
+    
+    # resized_img = await render_image_full(img)
+    return bytes("data:image/jpeg;base64,", encoding='utf-8') + img_str
 
-#     for shape in document.inline_shapes:
-#         print(shape.width)
-#         print(shape.height)
-#         print(shape.hyperlink)
-
-#     return docx.filename
-
-# docx.sections
-# docx.paragraphs
-# docx.inline_shapes
-# docx.paragraphs._p
+@route.put('/base64')
+async def img_base64(img_base64 : str = Form(...)):
+    img = Image.open(BytesIO(base64.b64decode(img_base64)))
+    img.save(i := BytesIO(), format='webp')
+    i.seek(0)
+    return StreamingResponse(i, media_type='image/png')

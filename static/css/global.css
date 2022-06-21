@@ -1,5 +1,5 @@
 :root {
-    --primary: #ffa710;
+    --primary: lightgreen;
     --secondary: #e0ff10;
     --green: #68ff10;
     --lightgreen: #10ff30;
@@ -10,6 +10,7 @@
     --dark: #444444;
     --shadow: rgba(0 0 0 / 20%)
 }
+/* --primary: #ffa710; */
 
 *, *::after, *::before {
     margin: 0;
@@ -116,11 +117,28 @@ li {list-style: none;}
     color: var(--dark);
     border-radius: 0.625rem;
     transition: background-color .3s, color .3s;
+    position: relative;
+    overflow: hidden;
 }
 
 #lista li a:is(:hover, :focus) {
-    background-color: rgba(255, 166, 0, 0.1);
     color: var(--primary);
+}
+
+#lista li a ::before {
+    width: 100%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    opacity: 0;
+    transition: background-color .3s;
+}
+
+#lista li a:is(:hover, :focus) ::before {
+    top: 0;
+    left: 0;
+    background-color: var(--primary);
+    opacity: .1;
 }
 
 .h-button a {

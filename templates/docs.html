@@ -1,14 +1,42 @@
 {% extends "layout.html" %}
 
 {% block title %}Documentación | Pictures change{% endblock %}
-{% block links %}{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', path='css/docs.css') }}">
+{% endblock %}
 {% block content %}
-<div class="main">
+
+<main class="main">
     <h1>Documentación de la API</h1>
     <hr />
     <h2>Comience una convertir desde comandos</h2>
     <p>Para empezar necesita hacer la siguiente petición POST:</p>
-    <pre>POST {{ url_for('converter') }}</pre>
-</div>
+<pre>POST {{ url_for('converter') }}</pre>
+    <p>Ejemplo de petición por curl:</p>
+<pre><span>curl -X </span><span class="green">'POST'</span><span> \</span>
+<span> </span><span class="green">'http://localhost:8000/img/'</span><span> \</span>
+<span> </span><span>-H </span><span class="green">'accept: application/json'</span><span> \</span>
+<span> </span><span>-H </span><span class="green">'Content-Type: multipart/form-data'</span> <span> \</span>
+<span> </span><span>-F </span><span class="green">'img=@lab5_1.PNG;type=image/png'</span></pre>
+
+    <section>
+        <h2>Parámetros de petición:</h2>
+        <p>img : list[ file ]</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+        <p>top : int</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+        <p>left : int</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+        <p>bottom : int</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+        <p>right : int</p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+        <p>type : string</p>
+        <p>image/jpeg, image/png, image/gif, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+    </section>
+</main>
 {% endblock %}
-{% block scripts %}{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='js/docs.js') }}"></script>
+{% endblock %}

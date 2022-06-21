@@ -71,14 +71,15 @@
 
 
 .bubble {
-    background-color: rgba(255, 210, 121, 0.3);
+    background-color: var(--primary);
+    opacity: .15;
     width: 150px;
     height: 150px;
     border-radius: 50%;
     position: absolute;
     z-index: -1;
     animation: bubbles 10s infinite linear;
-    box-shadow: 0 0 15px rgba(255, 210, 121, 0.3);
+    box-shadow: 0 0 15px var(--primary);
 }
 
 .bubble:nth-child(1) {top: 100px; right: 8%;}
@@ -169,10 +170,10 @@
 
 .resize > div {
     position: absolute;
-    width: 8px;
-    height: 8px;
+    padding: 4px;
     background-color: var(--light);
     border-radius: 15px;
+    border: 1px solid #767676;
 }
 
 .r-ne {top: 0; right: 0; transform: translate(50%, -50%); cursor: ne-resize;}
