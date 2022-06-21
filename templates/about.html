@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 
 {% block title %}Acerca | Pictures change{% endblock %}
-{% block links %}{% endblock %}
-{% block content %}a{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{{ url_for('static', path='css/about.css') }}">
+{% endblock %}
+{% block content %}
+<main class="main">
+    <section class="main-title">
+        <h1>Sobre nosotros</h1>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum, voluptatibus.</p>
+    </section>
+</main>
+{% endblock %}
 {% block scripts %}{% endblock %}

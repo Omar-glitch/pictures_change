@@ -61,11 +61,16 @@
     }
 
     const deleteAllChildren = (parent) => {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
+        const nodes = parent.childNodes;
+
+        for (const node of nodes) {
+            if (node.className != undefined) {
+                if (!node.className.includes('bubble')) {
+                    parent.removeChild(node);
+                }
+            }
         }
     }
-
 
     function createImageUrl() {
         for (const file of this.files) {

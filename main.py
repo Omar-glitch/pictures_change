@@ -34,3 +34,7 @@ async def converter(request: Request):
 @app.get('/about')
 async def about(request: Request):
     return templates.TemplateResponse('about.html', {'request' : request})
+
+@app.get('/code')
+async def code(request: Request):
+    return templates.TemplateResponse('code.html', {'request' : request})

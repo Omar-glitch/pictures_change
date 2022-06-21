@@ -25,7 +25,7 @@ async def img(img : UploadFile = File()):
 
 @route.put('/')
 async def img(img : ImageModel = Depends()):
-    im = Image.open(BytesIO(await img.img[0].read()))
+    im = Image.open(BytesIO(await img.img.read()))
     im.save(i := BytesIO(), format='WEBP')
     img_str = base64.b64encode(i.getvalue())
     

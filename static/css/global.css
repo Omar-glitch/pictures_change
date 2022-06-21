@@ -8,9 +8,10 @@
     --light: #FBFBFB;
     --light-d: #EBEDF0;
     --dark: #444444;
-    --shadow: rgba(0 0 0 / 20%)
+    --shadow: rgba(0 0 0 / 20%);
+
+    /* --primary: #ffa710; */
 }
-/* --primary: #ffa710; */
 
 *, *::after, *::before {
     margin: 0;
@@ -21,6 +22,7 @@
 body {
     background-color: var(--light);
     font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {

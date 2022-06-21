@@ -9,9 +9,9 @@
 <main class="main">
     <h1>Documentación de la API</h1>
     <hr />
-    <h2>Comience una convertir desde comandos</h2>
+    <h2>Convertir una imagen desde comandos:</h2>
     <p>Para empezar necesita hacer la siguiente petición POST:</p>
-<pre>POST {{ url_for('converter') }}</pre>
+<pre>POST {{ url_for('img') }}</pre>
     <p>Ejemplo de petición por curl:</p>
 <pre><span>curl -X </span><span class="green">'POST'</span><span> \</span>
 <span> </span><span class="green">'http://localhost:8000/img/'</span><span> \</span>
@@ -19,20 +19,48 @@
 <span> </span><span>-H </span><span class="green">'Content-Type: multipart/form-data'</span> <span> \</span>
 <span> </span><span>-F </span><span class="green">'img=@lab5_1.PNG;type=image/png'</span></pre>
 
-    <section>
+    <section class="param-container">
         <h2>Parámetros de petición:</h2>
-        <p>img : list[ file ]</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
-        <p>top : int</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
-        <p>left : int</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
-        <p>bottom : int</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
-        <p>right : int</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
-        <p>type : string</p>
-        <p>image/jpeg, image/png, image/gif, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita saepe laudantium voluptas natus tempora aut nobis voluptate ducimus recusandae!</p>
+        <p class="param">img : file <span class="required">* requerido</span></p>
+        <p>La imagen a renderizar proveniente de un formulario a travez de un input:file. Este es el único <span class="bold">campo obligatorio</span> y debe ser de tipo imagen sino retornara un error 422.</p>
+
+        <p class="param">box : bool</p>
+        <p>Valor <span class="bold">opcional</span> que especifica si la imagen debe renderizarse con formato caja (totalmente cuadrado) cortando las esquinas que sobresalgan y tomando la parte del centro. Si se omite o es falso tomará toda la imagen.</p>
+        
+        <p class="param">top : float</p>
+        <p>Valor <span class="bold">opcional</span> que especifica el área a recortar de la imagen de la parte de arriba. Este valor no debe ser mayor que la propiedad bottom.</p>
+
+        <p class="param">left : float</p>
+        <p>Valor <span class="bold">opcional</span> que especifica el área a recortar de la imagen de la parte izquierda. Este valor no debe ser mayor que la propiedad right.</p>
+
+        <p class="param">right : float</p>
+        <p>Valor <span class="bold">opcional</span> que especifica el área a recortar de la imagen de la parte derecha. Este valor no debe ser menor que la propiedad left.</p>
+
+        <p class="param">bottom : float</p>
+        <p>Valor <span class="bold">opcional</span> que especifica el área a recortar de la imagen de la parte de abajo. Este valor no debe ser menor que la propiedad top.</p>
+
+        <p class="param">type : string</p>
+        <p>El tipo de formato de imagen a retornar. Sus posibles valores son <span class="bold">'image/jpeg'</span>, <span class="bold">'image/png'</span>, <span class="bold">'image/webp'</span>, <span class="bold">'image/tiff'</span>. Por defecto es 'image/jpeg'.</p>
+
+        <p class="param">base64 : bool</p>
+        <p>Indica si la imagen debe ser convertida a base64 como response. Por defecto es <span class="bold">False.</span></p>
+    </section>
+
+    <h2>Convertir una imagen base64 desde comandos:</h2>
+    <p>Para empezar necesita hacer la siguiente petición PUT:</p>
+<pre>PUT {{ url_for('img_base64') }}</pre>
+    <p>Ejemplo de petición por curl:</p>
+<pre><span>curl -X </span><span class="green">'PUT'</span><span> \</span>
+<span> </span><span class="green">'{{ url_for('img_base64') }}'</span><span> \</span>
+<span> </span><span>-H </span><span class="green">'accept: application/json'</span><span> \</span>
+<span> </span><span>-H </span><span class="green">'Content-Type: application/x-www-form-urlencoded'</span> <span> \</span>
+<span> </span><span>-F </span><span class="green">'img_base64=base64img'</span></pre>
+
+    <section class="param-container">
+        <h2>Parámetros de petición:</h2>
+        <p class="param">base64 : string <span class="required">* requerido</span></p>
+        <p>Valor <span class="bold">requerido</span> que contiene el string decodificado en base 64.</p>
+
     </section>
 </main>
 {% endblock %}
