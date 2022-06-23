@@ -31,40 +31,39 @@
         }
     }
 
-    const mainMenu = `<h1>Convierte tus imágenes</h1>
-    <p class="null">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quos necessitatibus! Aut, officia dolor tempora eligendi voluptas ex ipsa cumque!</p>
-    <label class="img_container" for="file" id="file_label">
-        <svg viewBox="0 0 122.88 88.98" style="enable-background:new 0 0 122.88 88.98" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M85.33,16.83c12.99-9.83,31.92,1.63,31.92,13.63c0,7.75-2.97,10.79-7.57,14.03 c23.2,12.41,12.7,39.86-7.54,44.49l-70.69,0c-33.2,0-45.48-44.99-10.13-55.89C14.69,6.66,66.5-17.2,85.33,16.83L85.33,16.83z M53.37,69.54V53.66H39.16l22.29-26.82l22.29,26.82H69.53v15.88H53.37L53.37,69.54z"/></g></svg>
-        <p>Ingrese su archivo</p>
-        <input type="file" name="" id="file">
-    </label>
-    <button class="i-button">Convertir imagen base64</button>`;
+    const mainMenu = () => { 
+        deleteChildren(section, 'bubble');
+        return `<h1>Convierte tus imágenes</h1>
+        <p class="null">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quos necessitatibus! Aut, officia dolor tempora eligendi voluptas ex ipsa cumque!</p>
+        <label class="img_container" for="file" id="file_label">
+            <svg viewBox="0 0 122.88 88.98" style="enable-background:new 0 0 122.88 88.98" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M85.33,16.83c12.99-9.83,31.92,1.63,31.92,13.63c0,7.75-2.97,10.79-7.57,14.03 c23.2,12.41,12.7,39.86-7.54,44.49l-70.69,0c-33.2,0-45.48-44.99-10.13-55.89C14.69,6.66,66.5-17.2,85.33,16.83L85.33,16.83z M53.37,69.54V53.66H39.16l22.29-26.82l22.29,26.82H69.53v15.88H53.37L53.37,69.54z"/></g></svg>
+            <p>Ingrese su archivo</p>
+            <input type="file" name="" id="file">
+        </label>
+        <button class="i-button">Convertir imagen base64</button>`;
+    }
 
-    const converterMenu = (img) => `
-    <div id="img_c">
-        <img class="main_img" src="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" alt="">
-        <div class="r_container">
-            <div class="resize">
-                <div class="r-ne"></div>
-                <div class="r-se"></div>
-                <div class="r-nw"></div>
-                <div class="r-sw"></div>
-                <div class="r-n"></div>
-                <div class="r-s"></div>
-                <div class="r-w"></div>
-                <div class="r-e"></div>
+    const converterMenu = (source) => {
+        // deleteChildren(section, 'bubble')
+        return `
+            <div id="img_c">
+                <img class="main_img" src="${source}" alt="">
+                <div class="r_container">
+                    <div class="resize">
+                        <div class="r-ne"></div><div class="r-se"></div><div class="r-nw"></div><div class="r-sw"></div><div class="r-n"></div><div class="r-s"></div><div class="r-w"></div><div class="r-e"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div id='img_info'>
-        <p>Dimensiones: 700 x 400px.</p>
-        <p>Peso: 45000 KB</p>
-    </div>
-    <div id="img_actions">
-        <button class="outline-btn">Cancelar</button>
-        <button id="send" class="btn">Recortar</button>
-    </div>
-`
+            <div id='img_info'>
+                <p>Dimensiones: 700 x 400px.</p>
+                <p>Peso: 45000 KB</p>
+            </div>
+            <div id="img_actions">
+                <button id='cancel' class="outline-btn">Cancelar</button>
+                <button id="send" class="btn">Recortar</button>
+            </div>
+        `
+    }
 
     const base64Menu = () => `{
         a
@@ -94,6 +93,7 @@
     }
 
     function createImageUrl() {
+        currentFile = this.files[0];
         for (const file of this.files) {
             const source = URL.createObjectURL(file);
             deleteAllChildren(section, 'bubble');
@@ -131,13 +131,17 @@
                 // const pw = createTextElement(w);
                 // const ph = createTextElement(h);
                 // appendChildrenToElement([pw, ph], section)
+                console.log(w, h)
             }
 
             const img = createImageElement(source, "", getImage)
-            img.id = 'img_c '
-            const p_size = createTextElement(`${file.size} KB`)
+            // img.id = 'img_c'
+            // const p_size = createTextElement(`${file.size} KB`)
 
-            appendChildrenToElement([img, p_size], section)
+            // appendChildrenToElement([img, p_size], section)
+            section.innerHTML = converterMenu(source);
+            const cancel = document.querySelector('#cancel')
+            cancel.addEventListener('click', (e) => section.innerHTML = mainMenu())
         }
     }
 
@@ -273,5 +277,4 @@
     //     console.log(pointTop, pointTop + width)
     //     console.log(pointLeft, pointLeft + height)
     // });
-
 })()
