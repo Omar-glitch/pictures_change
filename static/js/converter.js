@@ -1,7 +1,7 @@
 (function() {
     const label_file = document.getElementById('file_label');
     const input_file = document.getElementById('file');
-    const section = document.getElementById('add_img')
+    const section = document.getElementById('add_img');
     let currentFile = null;
 
     const createTextElement = (text, type='p') => {
@@ -18,36 +18,43 @@
         return img;
     }
 
-    const createContainerElement = (children = [], type='div') => {
-        const container = document.createElement(type);
-        for (const child of children) {
-            container.appendChild(child);
-        }
+    const setMainMenuFunctions = () => {
+        const label_file = document.getElementById('file_label');
+        const input_file = document.getElementById('file');
+
+        input_file.addEventListener('change', createImageUrl);
     }
 
-    const appendChildrenToElement = (children = [], parentNode) => {
-        for (const child of children) {
-            parentNode.appendChild(child)
-        }
+    const setConverterMenuFunctions = () => {
+        const cancel = document.querySelector('#cancel')
+        cancel.addEventListener('click', getMainMenu)
     }
 
-    const mainMenu = () => { 
-        deleteChildren(section, 'bubble');
-        return `<h1>Convierte tus imágenes</h1>
+    const getMainMenu = () => { 
+        deleteAllChildren(section);
+        section.innerHTML = `<h1>Convierte tus imágenes</h1>
         <p class="null">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quos necessitatibus! Aut, officia dolor tempora eligendi voluptas ex ipsa cumque!</p>
         <label class="img_container" for="file" id="file_label">
             <svg viewBox="0 0 122.88 88.98" style="enable-background:new 0 0 122.88 88.98" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M85.33,16.83c12.99-9.83,31.92,1.63,31.92,13.63c0,7.75-2.97,10.79-7.57,14.03 c23.2,12.41,12.7,39.86-7.54,44.49l-70.69,0c-33.2,0-45.48-44.99-10.13-55.89C14.69,6.66,66.5-17.2,85.33,16.83L85.33,16.83z M53.37,69.54V53.66H39.16l22.29-26.82l22.29,26.82H69.53v15.88H53.37L53.37,69.54z"/></g></svg>
             <p>Ingrese su archivo</p>
-            <input type="file" name="" id="file">
+            <input type="file" name="" id="file" accept='image/*'>
         </label>
         <button class="i-button">Convertir imagen base64</button>`;
+        setMainMenuFunctions();
     }
 
-    const converterMenu = (source) => {
-        // deleteChildren(section, 'bubble')
-        return `
-            <div id="img_c">
-                <img class="main_img" src="${source}" alt="">
+    const setImageDimensions = () => {
+        const c = document.querySelector('#img_info');
+        if (!c) return;
+        // c.innerHTML = `<p>Dimensiones: ${this.width} x ${this.height}px.</p>
+        // <p>Peso: 45000 KB</p>`
+        this.className = 'main_image'
+    }
+
+    const getConverterMenu = (img) => {
+        deleteAllChildren(section);
+        section.innerHTML = `<div id="img_c">
+                <img class="main_img" src="${img.src}" alt="">
                 <div class="r_container">
                     <div class="resize">
                         <div class="r-ne"></div><div class="r-se"></div><div class="r-nw"></div><div class="r-sw"></div><div class="r-n"></div><div class="r-s"></div><div class="r-w"></div><div class="r-e"></div>
@@ -55,14 +62,16 @@
                 </div>
             </div>
             <div id='img_info'>
-                <p>Dimensiones: 700 x 400px.</p>
-                <p>Peso: 45000 KB</p>
+                <p>Dimensiones: ${img.w} x ${img.h}px.</p>
+                <p>Peso: ${img.size} KB</p>
             </div>
             <div id="img_actions">
                 <button id='cancel' class="outline-btn">Cancelar</button>
                 <button id="send" class="btn">Recortar</button>
-            </div>
-        `
+            </div>`;
+        setConverterMenuFunctions();
+        // const i = document.querySelector('.main_img');
+        // i.addEventListener('load', setImageDimensions);
     }
 
     const base64Menu = () => `{
@@ -80,69 +89,61 @@
         }
     }
 
-    const deleteAllChildren = (parent, clase) => {
-        const nodes = parent.childNodes;
-
-        for (const node of nodes) {
-            if (node.className != undefined) {
-                if (!node.className.includes(clase)) {
-                    parent.removeChild(node);
-                }
-            }
-        }
+    const deleteAllChildren = (parent) => {
+        while (parent.firstChild) parent.removeChild(parent.firstChild);
     }
 
     function createImageUrl() {
         currentFile = this.files[0];
-        for (const file of this.files) {
-            const source = URL.createObjectURL(file);
-            deleteAllChildren(section, 'bubble');
+        const size = currentFile.size;
+        console.log(currentFile)
+        const source = URL.createObjectURL(currentFile);
 
-            function getImage() {
-                let w = this.clientWidth;
-                let h = this.clientHeight;
+        deleteAllChildren(section);
 
-                // const canvas = document.createElement('canvas');
-                // const ctx = canvas.getContext('2d');
-                // canvas.width = w;
-                // canvas.height = h;
+        function getImage() {
+            let w = this.clientWidth;
+            let h = this.clientHeight;
 
-                // const formdata = new FormData();
-                // formdata.append('img', input_file.files[0])
+            // const canvas = document.createElement('canvas');
+            // const ctx = canvas.getContext('2d');
+            // canvas.width = w;
+            // canvas.height = h;
 
-                // fetch('/img/', {method: 'post', body: formdata})
-                // .then(res => res.blob())
-                // .then(blob => {
-                //     let a = document.createElement("a");
-                //     document.body.appendChild(a);
-                //     a.style = "display: none";
-                //     const url = window.URL.createObjectURL(blob);
-                //     a.href = url;
-                //     a.download = 'algo.jpeg';
-                //     a.click();
-                //     window.URL.revokeObjectURL(url);
-                //     document.body.removeChild(a);
-                // });  
+            // const formdata = new FormData();
+            // formdata.append('img', input_file.files[0])
 
-                // Draw the image
-                // ctx.drawImage(this, 0, 0);
-                // Get Base64 img, 0.8 means quality
-                // console.log(canvas.toDataURL('image/jpeg', 0.8))
-                // const pw = createTextElement(w);
-                // const ph = createTextElement(h);
-                // appendChildrenToElement([pw, ph], section)
-                console.log(w, h)
+            // fetch('/img/', {method: 'post', body: formdata})
+            // .then(res => res.blob())
+            // .then(blob => {
+            //     let a = document.createElement("a");
+            //     document.body.appendChild(a);
+            //     a.style = "display: none";
+            //     const url = window.URL.createObjectURL(blob);
+            //     a.href = url;
+            //     a.download = 'algo.jpeg';
+            //     a.click();
+            //     window.URL.revokeObjectURL(url);
+            //     document.body.removeChild(a);
+            // });  
+
+            // Draw the image
+            // ctx.drawImage(this, 0, 0);
+            // Get Base64 img, 0.8 means quality
+            // console.log(canvas.toDataURL('image/jpeg', 0.8))
+            // const pw = createTextElement(w);
+            // const ph = createTextElement(h);
+            // appendChildrenToElement([pw, ph], section)
             }
 
-            const img = createImageElement(source, "", getImage)
-            // img.id = 'img_c'
-            // const p_size = createTextElement(`${file.size} KB`)
-
-            // appendChildrenToElement([img, p_size], section)
-            section.innerHTML = converterMenu(source);
-            const cancel = document.querySelector('#cancel')
-            cancel.addEventListener('click', (e) => section.innerHTML = mainMenu())
+        const img = createImageElement(source, "", getImage)
+        // img.id = 'img_c'
+        const i = new Image()
+        i.src = source;
+        i.onload = function () {
+            getConverterMenu({size : size, src: source, w : this.width, h : this.height});
         }
+
     }
 
     input_file.addEventListener('change', createImageUrl);
