@@ -1,12 +1,48 @@
 {% extends "layout.html" %}
 
-{% block title %}Convertes | Pictures change{% endblock %}
+{% block title %}Code | Pictures change{% endblock %}
 
 {% block links %}
+<link rel="stylesheet" href="{{ url_for('static', path='css/code.css') }}">
 {% endblock %}
 
 {% block content %}
-<p>que paso</p>
+<main>
+    <h1>Ejemplos de uso de nuestra API: </h1>
+    <!-- <iframe src="http://localhost:8000/converter" width="500px" height="500px"> -->
+    <p>Primero que todo creemos una función que nos permita imágenes por medio de blobs:</p>
+    <pre>const URL_ = window.URL || window.webkitURL;
+
+const downloadBlob = (blob) => {
+    let a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    const url = URL_.createObjectURL(blob);
+    a.href = url;
+    a.download = 'imagen.jpeg';
+    a.click();
+    URL_.revokeObjectURL(url);
+    document.body.removeChild(a);
+}</pre>
+    <p>Luego creemos funciones que se encargaran de enviar y recibir las peticiones del servidor:</p>
+    <pre>
+const sendImg = () => {
+    const formdata = new FormData();
+    formdata.append('img', currentFile)
+    fetch('/img/', {method: 'post', body: formdata})
+        .then(res => res.blob())
+        .then(downloadBlob)
+}</pre>
+    <p>Ejemplo de envio de peticion de imagen base64.</p>
+    <pre>
+const sendBase64 = () => {
+    const formdata = new FormData();
+    formdata.append('img_base64', textarea.value)
+    fetch('/img/base64', {method: 'put', body: formdata})
+        .then(res => res.blob())
+        .then(downloadBlob)
+}</pre>
+</main>
 {% endblock %}
 
 {% block scripts %}

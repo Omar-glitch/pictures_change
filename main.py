@@ -3,10 +3,19 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from routes import img_route
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 app.include_router(img_route.route)
 app.mount('/static', StaticFiles(directory='static'), name="static")
+
+origins = ['*']
+app.add_middleware(CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 templates = Jinja2Templates(directory='templates')
 

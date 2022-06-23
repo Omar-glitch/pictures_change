@@ -1,0 +1,23 @@
+main {
+    width: 100%;
+    padding: 0 4%;
+    padding-top: 100px;
+    margin-bottom: 50px;
+}
+
+main > h1 {
+
+}
+
+main > p {
+    margin-bottom: 10px;
+}
+
+pre {
+    padding: 0.5rem;
+    background-color: var(--dark);
+    margin-bottom: 10px;
+    color: var(--light);
+    white-space: pre-wrap;
+    hyphens: auto;
+}

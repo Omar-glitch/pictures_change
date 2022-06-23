@@ -19,6 +19,12 @@
     text-align: center;
 }
 
+#add_img p a {
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: underline;
+}
+
 #add_img h2 {
     text-align: left;
     width: 95%;
@@ -144,9 +150,6 @@
     background-color: var(--black);
     margin-bottom: 10px;
     overflow: hidden;
-}
-
-.main_img {
 }
 
 .main_image {

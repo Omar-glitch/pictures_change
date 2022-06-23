@@ -3,15 +3,20 @@
     const input_file = document.getElementById('file');
     const section = document.getElementById('add_img');
     const base64button = document.querySelector('.i-button')
+    const URL_ = window.URL || window.webkitURL;
 
     let currentFile = null;
 
-    const createImageElement = (source, alt='user_imagen', callback = function() {}) => {
-        const img = document.createElement('img');
-        img.src = source;
-        img.alt = alt;
-        img.addEventListener('load', callback);
-        return img;
+    const downloadBlob = (blob) => {
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        const url = URL_.createObjectURL(blob);
+        a.href = url;
+        a.download = 'imagen.jpeg';
+        a.click();
+        URL_.revokeObjectURL(url);
+        document.body.removeChild(a);
     }
 
     const setMainMenuFunctions = () => {
@@ -24,29 +29,32 @@
     }
 
     const setConverterMenuFunctions = () => {
+        const send = document.querySelector('#send');
+
+        const sendImg = () => {
+            const formdata = new FormData();
+            formdata.append('img', currentFile)
+            fetch('/img/', {method: 'post', body: formdata})
+                .then(res => res.blob())
+                .then(downloadBlob)
+            getMainMenu();
+        }
+
+        send.addEventListener('click', sendImg);
+
         const cancel = document.querySelector('#cancel');
         cancel.addEventListener('click', getMainMenu);
     }
 
     const setBase64MenuFunctions = () => {
-        const textarea = document.querySelector('#base64')
+        const textarea = document.querySelector('#base64');
 
         const sendBase64 = () => {
             const formdata = new FormData();
             formdata.append('img_base64', textarea.value)
             fetch('/img/base64', {method: 'put', body: formdata})
                 .then(res => res.blob())
-                .then(blob => {
-                    let a = document.createElement("a");
-                    document.body.appendChild(a);
-                    a.style = "display: none";
-                    const url = window.URL.createObjectURL(blob);
-                    a.href = url;
-                    a.download = 'imagen.jpeg';
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                })
+                .then(downloadBlob)
             getMainMenu();
         }
 
@@ -59,7 +67,7 @@
     const getMainMenu = () => { 
         deleteAllChildren(section);
         section.innerHTML = `<h1>Convierte tus imágenes</h1>
-        <p class="null">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, quos necessitatibus! Aut, officia dolor tempora eligendi voluptas ex ipsa cumque!</p>
+        <p class="null">Comienza convirtiendo tus imágenes de una forma fácil. Agréganos a tu template por medio de <a href="/code">iframes.</a></p>
         <label class="img_container" for="file" id="file_label">
             <svg viewBox="0 0 122.88 88.98" style="enable-background:new 0 0 122.88 88.98" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M85.33,16.83c12.99-9.83,31.92,1.63,31.92,13.63c0,7.75-2.97,10.79-7.57,14.03 c23.2,12.41,12.7,39.86-7.54,44.49l-70.69,0c-33.2,0-45.48-44.99-10.13-55.89C14.69,6.66,66.5-17.2,85.33,16.83L85.33,16.83z M53.37,69.54V53.66H39.16l22.29-26.82l22.29,26.82H69.53v15.88H53.37L53.37,69.54z"/></g></svg>
             <p>Ingrese su archivo</p>
@@ -97,21 +105,10 @@
         <textarea placeholder="Ingresa la imagen base64..." id="base64" cols="30" rows="10"></textarea>
         </div>
         <div id="img_actions">
-                <button id='cancel' class="outline-btn">Cancelar</button>
-                <button id="send" class="btn">Convertir</button>
+            <button id='cancel' class="outline-btn">Cancelar</button>
+            <button id="send" class="btn">Convertir</button>
         </div>`;
         setBase64MenuFunctions();
-    }
-
-    const deleteChildren = (parent, clases) => {
-        const children = parent.children;
-        
-        for (const child of children) {
-            const isBubble = child.classList.value.includes(clases);
-            if (!isBubble) {
-                child.parentNode.removeChild(child);
-            }
-        }
     }
 
     const deleteAllChildren = (parent) => {
@@ -121,53 +118,13 @@
     function createImageUrl() {
         currentFile = this.files[0];
         const size = currentFile.size;
-        console.log(currentFile)
-        const source = URL.createObjectURL(currentFile);
+        const source = URL_.createObjectURL(currentFile);
 
         deleteAllChildren(section);
 
-        function getImage() {
-            let w = this.clientWidth;
-            let h = this.clientHeight;
-
-            // const canvas = document.createElement('canvas');
-            // const ctx = canvas.getContext('2d');
-            // canvas.width = w;
-            // canvas.height = h;
-
-            // const formdata = new FormData();
-            // formdata.append('img', input_file.files[0])
-
-            // fetch('/img/', {method: 'post', body: formdata})
-            // .then(res => res.blob())
-            // .then(blob => {
-            //     let a = document.createElement("a");
-            //     document.body.appendChild(a);
-            //     a.style = "display: none";
-            //     const url = window.URL.createObjectURL(blob);
-            //     a.href = url;
-            //     a.download = 'algo.jpeg';
-            //     a.click();
-            //     window.URL.revokeObjectURL(url);
-            //     document.body.removeChild(a);
-            // });  
-
-            // Draw the image
-            // ctx.drawImage(this, 0, 0);
-            // Get Base64 img, 0.8 means quality
-            // console.log(canvas.toDataURL('image/jpeg', 0.8))
-            // const pw = createTextElement(w);
-            // const ph = createTextElement(h);
-            // appendChildrenToElement([pw, ph], section)
-            }
-
-        const img = createImageElement(source, "", getImage)
-        // img.id = 'img_c'
         const i = new Image()
         i.src = source;
-        i.onload = function () {
-            getConverterMenu({size : size, src: source, w : this.width, h : this.height});
-        }
+        i.onload = function () {getConverterMenu({size : size, src: source, w : this.width, h : this.height});}
     }
 
     input_file.addEventListener('change', createImageUrl);
@@ -302,6 +259,37 @@
     //     console.log(pointTop, pointTop + width)
     //     console.log(pointLeft, pointLeft + height)
     // });
+
+    
+            // const canvas = document.createElement('canvas');
+            // const ctx = canvas.getContext('2d');
+            // canvas.width = w;
+            // canvas.height = h;
+
+            // const formdata = new FormData();
+            // formdata.append('img', input_file.files[0])
+
+            // fetch('/img/', {method: 'post', body: formdata})
+            // .then(res => res.blob())
+            // .then(blob => {
+            //     let a = document.createElement("a");
+            //     document.body.appendChild(a);
+            //     a.style = "display: none";
+            //     const url = window.URL.createObjectURL(blob);
+            //     a.href = url;
+            //     a.download = 'algo.jpeg';
+            //     a.click();
+            //     window.URL.revokeObjectURL(url);
+            //     document.body.removeChild(a);
+            // });  
+
+            // Draw the image
+            // ctx.drawImage(this, 0, 0);
+            // Get Base64 img, 0.8 means quality
+            // console.log(canvas.toDataURL('image/jpeg', 0.8))
+            // const pw = createTextElement(w);
+            // const ph = createTextElement(h);
+            // appendChildrenToElement([pw, ph], section)
     base64button.addEventListener('click', getBase64Menu)
 
 })()
