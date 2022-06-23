@@ -25,16 +25,16 @@ body {
     scroll-behavior: smooth;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
     background-color: var(--light);
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     border-radius: 1.25rem;
     background-color: var(--primary);
 }
 
-::-webkit-scrollbar-corner {
+body::-webkit-scrollbar-corner {
     background-color: black;
 }
 

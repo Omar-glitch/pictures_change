@@ -2,13 +2,9 @@
     const label_file = document.getElementById('file_label');
     const input_file = document.getElementById('file');
     const section = document.getElementById('add_img');
-    let currentFile = null;
+    const base64button = document.querySelector('.i-button')
 
-    const createTextElement = (text, type='p') => {
-        const element = document.createElement(type);
-        element.innerHTML = text;
-        return element;
-    }
+    let currentFile = null;
 
     const createImageElement = (source, alt='user_imagen', callback = function() {}) => {
         const img = document.createElement('img');
@@ -21,13 +17,43 @@
     const setMainMenuFunctions = () => {
         const label_file = document.getElementById('file_label');
         const input_file = document.getElementById('file');
+        const base64button = document.querySelector('.i-button')
 
+        base64button.addEventListener('click', getBase64Menu)
         input_file.addEventListener('change', createImageUrl);
     }
 
     const setConverterMenuFunctions = () => {
-        const cancel = document.querySelector('#cancel')
-        cancel.addEventListener('click', getMainMenu)
+        const cancel = document.querySelector('#cancel');
+        cancel.addEventListener('click', getMainMenu);
+    }
+
+    const setBase64MenuFunctions = () => {
+        const textarea = document.querySelector('#base64')
+
+        const sendBase64 = () => {
+            const formdata = new FormData();
+            formdata.append('img_base64', textarea.value)
+            fetch('/img/base64', {method: 'put', body: formdata})
+                .then(res => res.blob())
+                .then(blob => {
+                    let a = document.createElement("a");
+                    document.body.appendChild(a);
+                    a.style = "display: none";
+                    const url = window.URL.createObjectURL(blob);
+                    a.href = url;
+                    a.download = 'imagen.jpeg';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+            getMainMenu();
+        }
+
+        const cancel = document.querySelector('#cancel');
+        cancel.addEventListener('click', getMainMenu);
+        const send = document.querySelector('#send');
+        send.addEventListener('click', sendBase64)
     }
 
     const getMainMenu = () => { 
@@ -41,14 +67,6 @@
         </label>
         <button class="i-button">Convertir imagen base64</button>`;
         setMainMenuFunctions();
-    }
-
-    const setImageDimensions = () => {
-        const c = document.querySelector('#img_info');
-        if (!c) return;
-        // c.innerHTML = `<p>Dimensiones: ${this.width} x ${this.height}px.</p>
-        // <p>Peso: 45000 KB</p>`
-        this.className = 'main_image'
     }
 
     const getConverterMenu = (img) => {
@@ -70,13 +88,20 @@
                 <button id="send" class="btn">Recortar</button>
             </div>`;
         setConverterMenuFunctions();
-        // const i = document.querySelector('.main_img');
-        // i.addEventListener('load', setImageDimensions);
     }
 
-    const base64Menu = () => `{
-        a
-    }`
+    const getBase64Menu = () => {
+        section.innerHTML = `
+        <h2>Imagen base64</h2>
+        <div class="textarea">
+        <textarea placeholder="Ingresa la imagen base64..." id="base64" cols="30" rows="10"></textarea>
+        </div>
+        <div id="img_actions">
+                <button id='cancel' class="outline-btn">Cancelar</button>
+                <button id="send" class="btn">Convertir</button>
+        </div>`;
+        setBase64MenuFunctions();
+    }
 
     const deleteChildren = (parent, clases) => {
         const children = parent.children;
@@ -143,7 +168,6 @@
         i.onload = function () {
             getConverterMenu({size : size, src: source, w : this.width, h : this.height});
         }
-
     }
 
     input_file.addEventListener('change', createImageUrl);
@@ -278,4 +302,6 @@
     //     console.log(pointTop, pointTop + width)
     //     console.log(pointLeft, pointLeft + height)
     // });
+    base64button.addEventListener('click', getBase64Menu)
+
 })()

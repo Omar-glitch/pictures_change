@@ -34,7 +34,14 @@ async def img(img : ImageModel = Depends()):
 
 @route.put('/base64')
 async def img_base64(img_base64 : str = Form(...)):
-    img = Image.open(BytesIO(base64.b64decode(img_base64)))
+    base64string = 'data:image/jpeg;base64,'
+    if (not img_base64.startswith(base64string)):
+        raise HTTPException(422, {"message" : "the base64 string header is not correct"})
+    try:
+        img_base64 = img_base64[len(base64string) :]
+        img = Image.open(BytesIO(base64.b64decode(img_base64)))
+    except:
+        raise HTTPException(422, {"message" : "cannot convert to img"})
     img.save(i := BytesIO(), format='webp')
     i.seek(0)
     return StreamingResponse(i, media_type='image/png')
