@@ -44,8 +44,13 @@
 
         <p class="param">base64 : bool</p>
         <p>Indica si la imagen debe ser convertida a base64 como response. Por defecto es <span class="bold">False.</span></p>
+
+        <div class="info-button">
+            <a href="{{ url_for('code') }}">Ver ejemplos de código</a>
+        </div>
     </section>
 
+    <hr>
     <h2>Convertir una imagen base64 desde comandos:</h2>
     <p>Para empezar necesita hacer la siguiente petición PUT:</p>
 <pre>PUT {{ url_for('img_base64') }}</pre>
@@ -60,7 +65,9 @@
         <h2>Parámetros de petición:</h2>
         <p class="param">base64 : string <span class="required">* requerido</span></p>
         <p>Valor <span class="bold">requerido</span> que contiene el string decodificado en base 64.</p>
-
+        <div class="info-button">
+            <a href="{{ url_for('code') }}">Ver ejemplos de código</a>
+        </div>
     </section>
 </main>
 {% endblock %}

@@ -77,3 +77,24 @@ section > :not(.param) {
     margin-bottom: 20px;
     padding-left: 10px;
 }
+
+.button-container {
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 0;
+}
+
+.info-button {display: flex;}
+.info-button a {
+    color: var(--light);
+    padding: 10px 15px;
+    border-radius: 12px;
+    text-align: center;
+    background-color: var(--primary);
+    transition: filter .4s;
+    font-weight: 600;
+}
+.info-button a:is(:hover, :focus) {
+    filter: brightness(1.15);
+}
