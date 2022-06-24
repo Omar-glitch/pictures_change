@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Query, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from routes import img_route
 from fastapi.templating import Jinja2Templates
@@ -37,8 +37,8 @@ async def doc(request: Request):
     return templates.TemplateResponse('docs.html', {'request' : request})
 
 @app.get('/converter')
-async def converter(request: Request):
-    return templates.TemplateResponse('converter.html', {'request' : request})
+async def converter(request: Request, color : str = Query('#ffa710')):
+    return templates.TemplateResponse('converter.html', {'request' : request, 'color' : color})
 
 @app.get('/about')
 async def about(request: Request):

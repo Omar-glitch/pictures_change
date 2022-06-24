@@ -67,6 +67,8 @@
             getMainMenu();
         }
 
+        const iframe_ = document.querySelector('#_frame')
+
         send.addEventListener('click', sendImg);
         cancel.addEventListener('click', getMainMenu);
     }
