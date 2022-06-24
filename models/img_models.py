@@ -8,7 +8,6 @@ class ImgType(str, Enum):
     png = 'image/png'
     webp = 'image/webp'
     tiff = 'image/tiff'
-    icon = 'image/x-icon'
 
 class ImageModel:
     def __init__(
@@ -19,6 +18,7 @@ class ImageModel:
         left: float = Form (None),
         right: float = Form (None),
         bottom: float = Form (None),
+        b64: bool = Form(False),
         type : ImgType = Form(None)
     ):
         self.img = img
@@ -27,4 +27,5 @@ class ImageModel:
         self.right = right
         self.bottom = bottom
         self.left = left
+        self.b64 = b64
         self.type = type

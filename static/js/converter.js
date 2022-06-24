@@ -1,11 +1,11 @@
 (function() {
-    const label_file = document.getElementById('file_label');
-    const input_file = document.getElementById('file');
     const section = document.getElementById('add_img');
-    const base64button = document.querySelector('.i-button')
     const URL_ = window.URL || window.webkitURL;
-
     let currentFile = null;
+    let currentFileWidth = 0;
+    let currentFileHeight = 0;
+    let currentPorcentajeWidth = 0;
+    let currentPorcentajeHeight = 0;
 
     const downloadBlob = (blob) => {
         let a = document.createElement("a");
@@ -26,23 +26,45 @@
 
         base64button.addEventListener('click', getBase64Menu)
         input_file.addEventListener('change', createImageUrl);
+        label_file.addEventListener('drag', e => {e.preventDefault();})
+        label_file.addEventListener('dragstart', e => {e.preventDefault();})
+        label_file.addEventListener('dragover', e => {e.preventDefault();})
+        label_file.addEventListener('dragend', e => {e.preventDefault();})
+        label_file.addEventListener('dragenter', e => {e.preventDefault();})
+        label_file.addEventListener('dragleave', e => {e.preventDefault();})
+
+        label_file.addEventListener('drop', e => {
+            e.preventDefault();
+            currentFile = e.dataTransfer.files[0];
+            const size = currentFile.size;
+            const source = URL_.createObjectURL(currentFile);
+            const i = new Image();
+            i.src = source;
+            i.onload = function() {getConverterMenu({size : size, src: source, w : this.width, h : this.height});}
+        })
     }
 
     const setConverterMenuFunctions = () => {
         const send = document.querySelector('#send');
+        const cancel = document.querySelector('#cancel');
+        const boxCheckbox = document.querySelector('#box')
+        const b64Checkbox = document.querySelector('#b64')
 
         const sendImg = () => {
             const formdata = new FormData();
             formdata.append('img', currentFile)
+            formdata.append('b64', b64Checkbox.checked)
+            formdata.append('box', boxCheckbox.checked)
+
             fetch('/img/', {method: 'post', body: formdata})
-                .then(res => res.blob())
-                .then(downloadBlob)
+                .then(res => res.json()
+                    .then(e => console.log(e))
+                )    
+                // .then(downloadBlob)
             getMainMenu();
         }
 
         send.addEventListener('click', sendImg);
-
-        const cancel = document.querySelector('#cancel');
         cancel.addEventListener('click', getMainMenu);
     }
 
@@ -80,18 +102,22 @@
     const getConverterMenu = (img) => {
         deleteAllChildren(section);
         section.innerHTML = `<div id="img_c">
-                <img class="main_img" src="${img.src}" alt="">
-                <div class="r_container">
-                    <div class="resize">
-                        <div class="r-ne"></div><div class="r-se"></div><div class="r-nw"></div><div class="r-sw"></div><div class="r-n"></div><div class="r-s"></div><div class="r-w"></div><div class="r-e"></div>
-                    </div>
+            <img class="main_img" src="${img.src}" alt="">
+            <div class="r_container">
+                <div class="resize">
+                    <div class="r-ne"></div><div class="r-se"></div><div class="r-nw"></div><div class="r-sw"></div><div class="r-n"></div><div class="r-s"></div><div class="r-w"></div><div class="r-e"></div>
                 </div>
+            </div>
             </div>
             <div id='img_info'>
                 <p>Dimensiones: ${img.w} x ${img.h}px.</p>
                 <p>Peso: ${img.size} KB</p>
             </div>
             <div id="img_actions">
+                <label class='l_box' for='box'>Modo caja</label>
+                <input type='checkbox' id='box'/>
+                <label class='l_box' for='b64'>Base 64</label>
+                <input type='checkbox' id='b64'/>
                 <button id='cancel' class="outline-btn">Cancelar</button>
                 <button id="send" class="btn">Recortar</button>
             </div>`;
@@ -119,29 +145,13 @@
         currentFile = this.files[0];
         const size = currentFile.size;
         const source = URL_.createObjectURL(currentFile);
-
         deleteAllChildren(section);
-
         const i = new Image()
         i.src = source;
         i.onload = function () {getConverterMenu({size : size, src: source, w : this.width, h : this.height});}
     }
 
-    input_file.addEventListener('change', createImageUrl);
-
-    // const label_file = document.querySelector('#file_label')
-
-    label_file.addEventListener('drag', e => {e.preventDefault();})
-    label_file.addEventListener('dragstart', e => {e.preventDefault();})
-    label_file.addEventListener('dragover', e => {e.preventDefault();})
-    label_file.addEventListener('dragend', e => {e.preventDefault();})
-    label_file.addEventListener('dragenter', e => {e.preventDefault();})
-    label_file.addEventListener('dragleave', e => {e.preventDefault();})
-
-    label_file.addEventListener('drop', e => {
-        e.preventDefault();
-        console.log(e.dataTransfer.files)
-    })
+    setMainMenuFunctions();
 
     // const resizeCont = document.querySelector('.r_container');
     // const resizeDiv = document.querySelector('.resize');
@@ -290,6 +300,6 @@
             // const pw = createTextElement(w);
             // const ph = createTextElement(h);
             // appendChildrenToElement([pw, ph], section)
-    base64button.addEventListener('click', getBase64Menu)
+    // base64button.addEventListener('click', getBase64Menu)
 
 })()

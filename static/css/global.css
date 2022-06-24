@@ -21,6 +21,7 @@
 
 body {
     background-color: var(--light);
+    background-color: var(--dark);
     font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
 }

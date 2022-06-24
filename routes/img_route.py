@@ -18,8 +18,15 @@ route = APIRouter(prefix="/img")
 #     return StreamingResponse(resized_img, media_type='image/jpeg')
 
 @route.post('/')
-async def img(img : UploadFile = File()):
-    resized_img = await render_image_full(img)
+async def img(img : ImageModel = Depends()):
+    # resized_img = await render_image_full(img.img)
+    if img.box:
+        resized_img = await render_image(img.img)
+    else:
+        resized_img = await render_image_full(img.img)
+    if img.b64: 
+        img_str = base64.b64encode(resized_img.getvalue())
+        return bytes('data:image/jpeg;base64,', encoding='utf-8') + img_str
     resized_img.seek(0)
     return StreamingResponse(resized_img, media_type='image/png')
 
@@ -28,7 +35,6 @@ async def img(img : ImageModel = Depends()):
     im = Image.open(BytesIO(await img.img.read()))
     im.save(i := BytesIO(), format='WEBP')
     img_str = base64.b64encode(i.getvalue())
-    
     # resized_img = await render_image_full(img)
     return bytes("data:image/jpeg;base64,", encoding='utf-8') + img_str
 
