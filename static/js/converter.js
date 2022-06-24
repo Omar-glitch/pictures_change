@@ -2,10 +2,6 @@
     const section = document.getElementById('add_img');
     const URL_ = window.URL || window.webkitURL;
     let currentFile = null;
-    let currentFileWidth = 0;
-    let currentFileHeight = 0;
-    let currentPorcentajeWidth = 0;
-    let currentPorcentajeHeight = 0;
 
     const downloadBlob = (blob) => {
         let a = document.createElement("a");
@@ -66,8 +62,6 @@
                 }) 
             getMainMenu();
         }
-
-        const iframe_ = document.querySelector('#_frame')
 
         send.addEventListener('click', sendImg);
         cancel.addEventListener('click', getMainMenu);

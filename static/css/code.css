@@ -34,3 +34,13 @@ pre {
     white-space: pre-wrap;
     hyphens: auto;
 }
+
+.darke {color: rgb(163, 188, 255);}
+.yellow {color: rgb(255, 255, 175);}
+.gold {color: gold;}
+.skyblue {color: #b3e2f7;}
+.blue {color: rgb(100, 154, 255);}
+.purple {color: rgb(230, 0, 230);}
+.brown {color: rgb(255, 176, 139);}
+.gray {color: rgb(177, 177, 177);}
+.lightgreen {color: rgb(32, 238, 152);}
