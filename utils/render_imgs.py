@@ -1,6 +1,7 @@
 from PIL import Image, features
 from io import BytesIO
 from fastapi import UploadFile
+from models.img_models import ImageModel
 
 async def render_image(img : UploadFile):
     file = Image.open(BytesIO(await img.read()))
@@ -17,9 +18,13 @@ async def render_image(img : UploadFile):
     r.save(i := BytesIO(), 'webp')
     return i
 
-async def render_image_full(img : UploadFile):
-    file = Image.open(BytesIO(await img.read()))
+async def render_image_full(img : ImageModel):
+    file = Image.open(BytesIO(await img.img.read()))
     file.thumbnail((400, 200), Image.ANTIALIAS)
+    print(img.top)
+
+    if img.top:
+        file = file.crop((img.left, img.top, img.right, img.bottom))
     file.save(i := BytesIO(), 'webp')
     return i
 

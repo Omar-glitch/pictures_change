@@ -30,7 +30,7 @@ const downloadBlob = (blob) => {
     URL_.revokeObjectURL(url);
     document.body.removeChild(a);
 }</pre>
-    <p>Luego creemos funciones que se encargaran de enviar y recibir las peticiones del servidor:</p>
+    <p>Luego creemos funciones que se encargaran de enviar, en donde currentFile es el archivo de imagen actual proveniente de un input:file. En este caso usamos la API de FormData() para una mayor legibilidad y envio de la imagen.</p>
     <pre>
 const sendImg = () => {
     const formdata = new FormData();
@@ -47,6 +47,33 @@ const sendBase64 = () => {
     fetch('/img/base64', {method: 'put', body: formdata})
         .then(res => res.blob())
         .then(downloadBlob)
+}</pre>
+    <p>Ejemplo con peticion de imagen cuadrada y que retorne base64. En donde 'b64Checkbox' y 'boxCheckbox' son checkbox y accedemos a su valor booleano. Recuerda al especificar el valor 'box' como true no puedes usar los parametros de corte.</p>
+    <pre>
+const sendImg = () => {
+    const formdata = new FormData();
+    formdata.append('img', currentFile)
+    formdata.append('b64', b64Checkbox.checked)
+    formdata.append('box', boxCheckbox.checked)
+
+    fetch('/img/', {method: 'post', body: formdata})
+    .then(res => res.json()
+        .then(e => console.log(e))
+    )
+}</pre>
+<p>Ejemplo usando el método crop recuerda que algunos valores no deben ser menores que otros. <a href="{{ url_for('doc') }}">Ver documentación.</a></p>
+<pre>
+const sendImg = () => {
+    const formdata = new FormData();
+    formdata.append('img', currentFile)
+    formdata.append('top', 50)
+    formdata.append('left', 50)
+    formdata.append('right', 100)
+    formdata.append('bottom', 100)
+
+    fetch('/img/', {method: 'post', body: formdata})
+    .then(res => res.blob()
+        .then(downloadBlob))
 }</pre>
 </main>
 {% endblock %}

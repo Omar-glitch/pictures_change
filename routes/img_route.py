@@ -23,7 +23,7 @@ async def img(img : ImageModel = Depends()):
     if img.box:
         resized_img = await render_image(img.img)
     else:
-        resized_img = await render_image_full(img.img)
+        resized_img = await render_image_full(img)
     if img.b64: 
         img_str = base64.b64encode(resized_img.getvalue())
         return bytes('data:image/jpeg;base64,', encoding='utf-8') + img_str

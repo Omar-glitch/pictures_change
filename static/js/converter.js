@@ -57,10 +57,13 @@
             formdata.append('box', boxCheckbox.checked)
 
             fetch('/img/', {method: 'post', body: formdata})
-                .then(res => res.json()
-                    .then(e => console.log(e))
-                )    
-                // .then(downloadBlob)
+                .then(res => {
+                    if (b64Checkbox.checked) {
+                        res.json().then(e => console.log(e))
+                    } else {
+                        res.blob().then(downloadBlob)
+                    }
+                }) 
             getMainMenu();
         }
 

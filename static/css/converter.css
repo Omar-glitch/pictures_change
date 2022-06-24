@@ -162,8 +162,8 @@
 #img_c {
     position: relative;
     width: 90%;
-    max-width: 450px;
-    max-height: 450px;
+    max-width: 420px;
+    max-height: 420px;
     background-color: var(--black);
     margin-bottom: 10px;
     overflow: hidden;
