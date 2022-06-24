@@ -14,10 +14,12 @@
     background-repeat: none;
     background-size: cover;
     background-position: center;
-    min-height: 600px;
-    max-height: 620px;
+    min-height: 37.5rem;
+    max-height: 38.75rem;
     clip-path: polygon(0 0, 100% 0, 100% 91%, 50% 100%, 0 90%);
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
+    color: var(--primary);
+    text-align: center;
 }
 
 .main-title::before {
@@ -32,7 +34,20 @@
     z-index: -1;
 }
 
-.main-title > h1 {
-    color: var(--primary);
-    font-size: 50px;
+.main-title > h1 {font-size: 3.125rem;}
+
+.main-title > hr {
+    width: 95%;
+    height: 0.1875rem;
+    border: none;
+    background-color: currentColor;
+    max-width: 28.125rem;
+    min-width: 16.25rem;
+    margin: 0.75rem 0;
+}
+
+.main-title > p {
+    width: 95%; 
+    max-width: 37.5rem;
+    font-size: 1.125rem;
 }
