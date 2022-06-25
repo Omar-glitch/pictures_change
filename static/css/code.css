@@ -55,6 +55,12 @@ pre {
     width: 100%;
 }
 
+#video {
+    width: 100%;
+    max-width: 50rem;
+    margin-bottom: 10px;
+}
+
 
 .darke {color: rgb(163, 188, 255);}
 .yellow {color: rgb(255, 255, 175);}
