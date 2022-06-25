@@ -34,7 +34,6 @@ async def img(img : ImageModel = Depends()):
     im = Image.open(BytesIO(await img.img.read()))
     im.save(i := BytesIO(), format='WEBP')
     img_str = base64.b64encode(i.getvalue())
-    # resized_img = await render_image_full(img)
     return bytes("data:image/jpeg;base64,", encoding='utf-8') + img_str
 
 @route.put('/base64')

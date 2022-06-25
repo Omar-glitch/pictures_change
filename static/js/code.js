@@ -59,7 +59,7 @@
     copy4.addEventListener('click', () => copyTextToClipboard(`const sendImg = () => { 
         const formdata = new FormData();
         formdata.append('img', currentFile)
-        fetch('/img/', {method: 'post', body: formdata})
+        fetch('http://localhost/img/', {method: 'post', body: formdata})
             .then(res => res.blob())
             .then(downloadBlob)
     }`));
@@ -67,7 +67,7 @@
     copy5.addEventListener('click', () => copyTextToClipboard(`const sendBase64 = () => { 
         const formdata = new FormData();
         formdata.append('img_base64', textarea.value);
-        fetch('/img/base64', {method: 'put', body: formdata});
+        fetch('http://localhost/img/base64', {method: 'put', body: formdata});
             .then(res => res.blob())
             .then(downloadBlob)
     }`));
@@ -79,7 +79,7 @@
         formdata.append('b64', b64Checkbox.checked)
         formdata.append('box', boxCheckbox.checked)
     
-        fetch('/img/', {method: 'post', body: formdata})
+        fetch('http://localhost/img/', {method: 'post', body: formdata})
             .then(res => res.json()
                 .then(e => console.log(e))
         )
@@ -93,7 +93,7 @@
         formdata.append('right', 100)
         formdata.append('bottom', 100)
     
-        fetch('/img/', {method: 'post', body: formdata})
+        fetch('http://localhost/img/', {method: 'post', body: formdata})
             .then(res => res.blob())
                 .then(downloadBlob)
     }`));
