@@ -18,6 +18,7 @@ class ImageModel:
         left: float = Form (None),
         right: float = Form (None),
         bottom: float = Form (None),
+        size: int = Form(200),
         b64: bool = Form(False),
         type : ImgType = Form(None)
     ):
@@ -26,6 +27,7 @@ class ImageModel:
         self.top = top
         self.right = right
         self.bottom = bottom
+        self.size = size
         self.left = left
         self.b64 = b64
         self.type = type

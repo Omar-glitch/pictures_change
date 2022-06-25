@@ -47,3 +47,7 @@ async def about(request: Request):
 @app.get('/code')
 async def code(request: Request):
     return templates.TemplateResponse('code.html', {'request' : request})
+
+@app.get('/co')
+async def converter(request: Request, color : str = Query('#ffa710')):
+    return templates.TemplateResponse('co.html', {'request' : request, 'color' : color})

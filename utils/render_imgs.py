@@ -3,8 +3,8 @@ from io import BytesIO
 from fastapi import UploadFile
 from models.img_models import ImageModel
 
-async def render_image(img : UploadFile):
-    file = Image.open(BytesIO(await img.read()))
+async def render_image(img : ImageModel):
+    file = Image.open(BytesIO(await img.img.read()))
     width, height = file.size
     v, h = 0, 0
     resta = width - height
@@ -13,15 +13,14 @@ async def render_image(img : UploadFile):
         if width > height: h = resta / 2
         else: v = - resta / 2
 
-    r = file.resize((200, 200), box=(h, v, width - h, height - v))
+    r = file.resize((img.size, img.size), box=(h, v, width - h, height - v))
     r.convert('RGB')
     r.save(i := BytesIO(), 'webp')
     return i
 
 async def render_image_full(img : ImageModel):
     file = Image.open(BytesIO(await img.img.read()))
-    file.thumbnail((400, 200), Image.ANTIALIAS)
-    print(img.top)
+    file.thumbnail((img.size, img.size), Image.ANTIALIAS)
 
     if img.top:
         file = file.crop((img.left, img.top, img.right, img.bottom))

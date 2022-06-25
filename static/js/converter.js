@@ -3,6 +3,38 @@
     const URL_ = window.URL || window.webkitURL;
     let currentFile = null;
 
+    const fallbackCopyTextToClipboard = (text) => {
+        let textArea = document.createElement("textarea");
+        textArea.value = text;
+        
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+      
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+      
+        try {
+          let successful = document.execCommand('copy');
+          let msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Fallback: Copying text command was ' + msg);
+        } catch (err) {
+          console.error('Fallback: Oops, unable to copy', err);
+        }
+      
+        document.body.removeChild(textArea);
+      }
+
+    const copyTextToClipboard = (text) => {
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+        }
+        navigator.clipboard.writeText(text);
+    }
+
     const downloadBlob = (blob) => {
         let a = document.createElement("a");
         document.body.appendChild(a);
@@ -43,19 +75,27 @@
     const setConverterMenuFunctions = () => {
         const send = document.querySelector('#send');
         const cancel = document.querySelector('#cancel');
-        const boxCheckbox = document.querySelector('#box')
-        const b64Checkbox = document.querySelector('#b64')
+        const sizeInput = document.querySelector('#number');
+        const boxCheckbox = document.querySelector('#box');
+        const b64Checkbox = document.querySelector('#b64');
 
         const sendImg = () => {
             const formdata = new FormData();
             formdata.append('img', currentFile)
             formdata.append('b64', b64Checkbox.checked)
             formdata.append('box', boxCheckbox.checked)
+            if (sizeInput.value) {
+                formdata.append('size', sizeInput.value);
+            }
 
             fetch('/img/', {method: 'post', body: formdata})
                 .then(res => {
                     if (b64Checkbox.checked) {
-                        res.json().then(e => console.log(e))
+                        res.json().then(e => {
+                            console.log(e);
+                            alert('Imagen copiada al portapapeles.')
+                            copyTextToClipboard(e);
+                        })
                     } else {
                         res.blob().then(downloadBlob)
                     }
@@ -113,7 +153,8 @@
                 <p>Peso: ${img.size} KB</p>
             </div>
             <div id="img_actions">
-                <label class='l_box' for='box'>Modo caja</label>
+                <input type='number' placeholder='Tamaño' id='number' />
+                <label class='l_box' for='box'>Caja</label>
                 <input type='checkbox' id='box'/>
                 <label class='l_box' for='b64'>Base 64</label>
                 <input type='checkbox' id='b64'/>

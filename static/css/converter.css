@@ -181,6 +181,19 @@
     max-width: 450px;
 }
 
+#number {
+    width: 80px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 10px;
+    outline: none;
+    border: 2px solid var(--primary);
+}
+
+#number:hover {
+    filter: brightness(1.1);
+}
+
 .r_container {
     width: 100%;
     height: 100%;

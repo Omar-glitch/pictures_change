@@ -38,9 +38,11 @@
     const copy5 = document.querySelector('#copy5');
     const copy6 = document.querySelector('#copy6');
     const copy7 = document.querySelector('#copy7');
+    const copy8 = document.querySelector('#copy8');
 
     copy1.addEventListener('click', () => copyTextToClipboard('<iframe src="http://localhost:8000/converter" width="500px" height="500px">'));
     copy2.addEventListener('click', () => copyTextToClipboard('<iframe src="http://localhost:8000/converter?color=green" width="500px" height="500px">'));
+    copy8.addEventListener('click', () => copyTextToClipboard('<iframe src="http://localhost:8000/co?color=green" width="500px" height="500px">'));
     copy3.addEventListener('click', () => copyTextToClipboard(`const URL_ = window.URL || window.webkitURL;
         const downloadBlob = (blob) => {
             let a = document.createElement("a");
@@ -73,6 +75,7 @@
     copy6.addEventListener('click', () => copyTextToClipboard(`const sendImg = () => { 
         const formdata = new FormData();
         formdata.append('img', currentFile)
+        formdata.append('size', sizeInput.value)
         formdata.append('b64', b64Checkbox.checked)
         formdata.append('box', boxCheckbox.checked)
     

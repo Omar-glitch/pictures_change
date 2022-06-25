@@ -19,9 +19,8 @@ route = APIRouter(prefix="/img")
 
 @route.post('/')
 async def img(img : ImageModel = Depends()):
-    # resized_img = await render_image_full(img.img)
     if img.box:
-        resized_img = await render_image(img.img)
+        resized_img = await render_image(img)
     else:
         resized_img = await render_image_full(img)
     if img.b64: 
