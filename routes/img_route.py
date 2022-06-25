@@ -11,12 +11,6 @@ WORD_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessin
 
 route = APIRouter(prefix="/img")
 
-# @route.post('/')
-# async def img(img : UploadFile = File(...)):
-#     resized_img = await render_image_full(img)
-#     resized_img.seek(0)
-#     return StreamingResponse(resized_img, media_type='image/jpeg')
-
 @route.post('/')
 async def img(img : ImageModel = Depends()):
     if img.box:
