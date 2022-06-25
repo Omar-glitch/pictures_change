@@ -23,17 +23,38 @@ main > h2 {
 }
 
 main > p {
-    margin-bottom: 0.625rem;
+    margin-bottom: 15px;
 }
 
 pre {
     padding: 0.5rem;
     background-color: var(--dark);
-    margin-bottom: 0.625rem;
+    margin-bottom: 0.9375rem;
     color: var(--light);
     white-space: pre-wrap;
     hyphens: auto;
+    position: relative;
 }
+
+.copy {
+    fill: var(--primary);
+    position: absolute;
+    bottom: 6px;
+    cursor: pointer;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+.copy:hover {
+    filter: brightness(1.2);
+}
+
+.container-pre {
+    position: relative;
+    width: 100%;
+}
+
 
 .darke {color: rgb(163, 188, 255);}
 .yellow {color: rgb(255, 255, 175);}

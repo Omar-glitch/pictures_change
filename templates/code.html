@@ -6,25 +6,37 @@
 <link rel="stylesheet" href="{{ url_for('static', path='css/code.css') }}">
 {% endblock %}
 
-
-<iframe src="http://localhost:8000/converter" width="500px" height="500px"></iframe>
 {% block content %}
 <main>
     <h1>&lt;C&oacute;digo para comenzar /&gt;</h1>
     <hr>
     <h2>Inyectanos en tu proyecto</h2>
+    <div class="container-pre">
     <pre>
 <span class="gray">&lt;</span><span class="blue">iframe</span> <span class="skyblue">src</span>=<span class="brown">&quot;http://localhost:8000/converter&quot;</span> <span class="skyblue">width</span>=<span class="brown">&quot;500px&quot;</span> <span class="skyblue">height</span>=<span class="brown">&quot;500px&quot;</span><span class="gray">&gt;</span></pre>
+    <svg id="copy1" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+    </div>
+
     <p>Con este iframe puedes agregar nuestra página de conversión de imágenes a tu proyecto.</p>
+    <div class="container-pre">
     <pre>
 <span class="gray">&lt;</span><span class="blue">iframe</span> <span class="skyblue">src</span>=<span class="brown">&quot;http://localhost:8000/converter?color=green&quot;</span> <span class="skyblue">width</span>=<span class="brown">&quot;500px&quot;</span> <span class="skyblue">height</span>=<span class="brown">&quot;500px&quot;</span><span class="gray">&gt;</span></pre>
+    <svg id="copy2" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+    </div>
     <p>Puedes personalizar el color del iframa colocando en la fuente un parametro 'color' y el color que necesites.</p>
 
     <hr>
     <h2>Uso de nuestra API:</h2>    
     <p>Primero que todo creemos una función que nos permita imágenes por medio de blobs:</p>
-    <pre><span class="blue">const</span> <span class="lightgreen">URL_</span> = <span class="skyblue">window</span>.<span class="lightgreen">URL</span> || <span class="skyblue">window</span>.<span class="lightgreen">webkitURL</span>;
-
+    <div class="container-pre">
+        <pre><span class="blue">const</span> <span class="lightgreen">URL_</span> = <span class="skyblue">window</span>.<span class="lightgreen">URL</span> || <span class="skyblue">window</span>.<span class="lightgreen">webkitURL</span>;
+    
 <span class="blue">const</span> <span class="darke">downloadBlob</span> = <span class="darke">(</span><span class="skyblue">blob</span><span class="darke">)</span> <span class="darke">=></span> <span class="darke">{
     <span class="blue">let</span> <span class="skyblue">a</span> = <span class="skyblue">document</span>.<span class="yellow">createElement</span><span class="gold">(</span><span class="brown">"a"</span><span class="gold">)</span>;
     <span class="skyblue">document</span>.<span class="skyblue">body</span>.<span class="yellow">appendChild</span><span class="gold">(</span><span class="skyblue">a</span><span class="gold">)</span>;
@@ -36,8 +48,15 @@
     <span class="lightgreen">URL_</span>.<span class="yellow">revokeObjectURL</span><span class="gold">(</span><span class="darke">url</span><span class="gold">)</span>;
     <span class="skyblue">document</span>.<span class="skyblue">body</span>.<span class="yellow">removeChild</span><span class="gold">(</span><span class="skyblue">a</span><span class="gold">)</span>;
 <span class="darke">}</pre>
+    <svg id="copy3" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+    </div>
+
     <p>Luego creemos funciones que se encargaran de enviar, en donde currentFile es el archivo de imagen actual proveniente de un input:file. En este caso usamos la API de FormData() para una mayor legibilidad y envio de la imagen.</p>
-    <pre>
+    <div class="container-pre">
+        <pre>
 <span class="blue">const</span> <span class="yellow">sendImg</span> = <span class="gold">(</span><span class="gold">)</span> <span class="blue">=></span> <span class="gold">{</span> 
     <span class="blue">const</span> <span class="darke">formdata</span> = <span class="blue">new</span> <span class="lightgreen">FormData</span><span class="purple">()</span>;
     <span class="darke">formdata</span>.<span class="yellow">append</span><span class="purple">(</span><span class="brown">'img'</span>, <span class="skyblue">currentFile</span><span class="purple">)</span>
@@ -45,7 +64,13 @@
         .<span class="yellow">then</span><span class="purple">(</span><span class="skyblue">res</span> <span class="blue">=></span> <span class="skyblue">res</span>.<span class="yellow">blob</span><span class="blue">()</span><span class="purple">)</span>
         .<span class="yellow">then</span><span class="purple">(</span><span class="yellow">downloadBlob</span><span class="purple">)</span>
 <span class="gold">}</span></pre>
+    <svg id="copy4" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+    </div>
     <p>Ejemplo de envio de peticion de imagen base64.</p>
+    <div class="container-pre">
     <pre>
 <span class="blue">const</span> <span class="yellow">sendBase64</span> = <span class="gold">(</span><span class="gold">)</span> <span class="blue">=></span> <span class="gold">{</span> 
     <span class="blue">const</span> <span class="darke">formdata</span> = <span class="blue">new</span> <span class="lightgreen">FormData</span><span class="purple">()</span>;
@@ -54,7 +79,13 @@
         .<span class="yellow">then</span><span class="purple">(</span><span class="skyblue">res</span> <span class="blue">=></span> <span class="skyblue">res</span>.<span class="yellow">blob</span><span class="blue">()</span><span class="purple">)</span>
         .<span class="yellow">then</span><span class="purple">(</span><span class="yellow">downloadBlob</span><span class="purple">)</span>
 <span class="gold">}</span></pre>
+    <svg id="copy5" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+    </div>
     <p>Ejemplo con peticion de imagen cuadrada y que retorne base64. En donde 'b64Checkbox' y 'boxCheckbox' son checkbox y accedemos a su valor booleano. Recuerda al especificar el valor 'box' como true no puedes usar los parametros de corte.</p>
+    <div class="container-pre">
     <pre>
 <span class="blue">const</span> <span class="yellow">sendImg</span> = <span class="gold">(</span><span class="gold">)</span> <span class="blue">=></span> <span class="gold">{</span> 
     <span class="blue">const</span> <span class="darke">formdata</span> = <span class="blue">new</span> <span class="lightgreen">FormData</span><span class="purple">()</span>;
@@ -67,7 +98,13 @@
             .<span class="yellow">then</span><span class="purple">(</span><span class="skyblue">e</span> <span class="blue">=></span> <span class="skyblue">console</span>.<span class="yellow">log</span><span class="blue">(</span><span class="skyblue">e</span><span class="blue">)</span><span class="purple">)</span>
     <span class="purple">)</span>
 <span class="gold">}</span></pre>
+    <svg id="copy6" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+    </div>
 <p>Ejemplo usando el método crop recuerda que algunos valores no deben ser menores que otros. <a href="{{ url_for('doc') }}">Ver documentación.</a></p>
+<div class="container-pre">
 <pre>
 <span class="blue">const</span> <span class="yellow">sendImg</span> = <span class="gold">(</span><span class="gold">)</span> <span class="blue">=></span> <span class="gold">{</span> 
     <span class="blue">const</span> <span class="darke">formdata</span> = <span class="blue">new</span> <span class="lightgreen">FormData</span><span class="purple">()</span>;
@@ -81,8 +118,14 @@
         .<span class="yellow">then</span><span class="purple">(</span><span class="skyblue">res</span> <span class="blue">=></span> <span class="skyblue">res</span>.<span class="yellow">blob</span><span class="blue">()</span><span class="purple">)</span>
             .<span class="yellow">then</span><span class="purple">(</span><span class="yellow">downloadBlob</span><span class="purple">)</span>
 <span class="gold">}</span></pre>
+    <svg id="copy7" class="copy" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+    </svg>
+</div>
 </main>
 {% endblock %}
 
 {% block scripts %}
+<script src="{{ url_for('static', path='js/code.js') }}"></script>
 {% endblock %}
