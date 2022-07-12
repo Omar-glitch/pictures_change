@@ -9,7 +9,7 @@ app = FastAPI()
 app.include_router(img_route.route)
 app.mount('/static', StaticFiles(directory='static'), name="static")
 
-origins = ['*']
+origins = ['']
 app.add_middleware(CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
