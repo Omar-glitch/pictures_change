@@ -4,11 +4,9 @@ from routes import img_route
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 app = FastAPI()
 app.include_router(img_route.route)
-app.add_middleware(HTTPSRedirectMiddleware)
 
 app.mount('/static', StaticFiles(directory='static'), name="static")
 
