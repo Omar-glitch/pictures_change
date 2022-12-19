@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 app.include_router(img_route.route)
+app.config["PREFERRED_URL_SCHEME"] = "https"
 
 app.mount('/static', StaticFiles(directory='static'), name="static")
 
